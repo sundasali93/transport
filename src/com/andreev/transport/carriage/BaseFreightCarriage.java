@@ -29,4 +29,29 @@ public abstract class BaseFreightCarriage extends BaseCarriage {
 							+ this.maxCapacity + "]");
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + curCapacity;
+		result = prime * result + maxCapacity;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof BaseFreightCarriage))
+			return false;
+		BaseFreightCarriage other = (BaseFreightCarriage) obj;
+		if (curCapacity != other.curCapacity)
+			return false;
+		if (maxCapacity != other.maxCapacity)
+			return false;
+		return true;
+	}	
+
 }

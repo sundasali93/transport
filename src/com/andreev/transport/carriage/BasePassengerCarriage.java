@@ -78,4 +78,38 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 					"Maximum baggage weight is under zero");
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + baggageCurWeight;
+		result = prime * result + baggageMaxWeight;
+		result = prime * result + comfortType;
+		result = prime * result + passengerCurCount;
+		result = prime * result + passengerMaxCount;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof BasePassengerCarriage))
+			return false;
+		BasePassengerCarriage other = (BasePassengerCarriage) obj;
+		if (baggageCurWeight != other.baggageCurWeight)
+			return false;
+		if (baggageMaxWeight != other.baggageMaxWeight)
+			return false;
+		if (comfortType != other.comfortType)
+			return false;
+		if (passengerCurCount != other.passengerCurCount)
+			return false;
+		if (passengerMaxCount != other.passengerMaxCount)
+			return false;
+		return true;
+	}
+
 }

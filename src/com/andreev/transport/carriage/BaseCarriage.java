@@ -53,4 +53,43 @@ public abstract class BaseCarriage {
 			throw new NullPointerException("Product date is null");
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((carriageNumber == null) ? 0 : carriageNumber.hashCode());
+		result = prime * result + carriageWeight;
+		result = prime * result + id;
+		result = prime * result
+				+ ((productionDate == null) ? 0 : productionDate.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof BaseCarriage))
+			return false;
+		BaseCarriage other = (BaseCarriage) obj;
+		if (carriageNumber == null) {
+			if (other.carriageNumber != null)
+				return false;
+		} else if (!carriageNumber.equals(other.carriageNumber))
+			return false;
+		if (carriageWeight != other.carriageWeight)
+			return false;
+		if (id != other.id)
+			return false;
+		if (productionDate == null) {
+			if (other.productionDate != null)
+				return false;
+		} else if (!productionDate.equals(other.productionDate))
+			return false;
+		return true;
+	}
+
 }
