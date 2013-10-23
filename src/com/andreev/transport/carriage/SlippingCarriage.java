@@ -2,11 +2,13 @@ package com.andreev.transport.carriage;
 
 import java.util.Date;
 
+import com.andreev.exeption.OutOfRangeExeption;
+
 public class SlippingCarriage extends BasePassengerCarriage {
 
 	public SlippingCarriage(int id, String carriageNumber, Date productionDate,
 			int carriageWeight, int comfortType, int passengerMaxCount,
-			int baggageMaxWeight) {
+			int baggageMaxWeight) throws OutOfRangeExeption {
 		setId(id);
 		setCarriageNumber(carriageNumber);
 		setProductionDate(productionDate);

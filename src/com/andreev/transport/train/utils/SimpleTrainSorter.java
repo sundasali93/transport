@@ -9,10 +9,10 @@ import com.andreev.transport.carriage.BaseLocomotive;
 import com.andreev.transport.carriage.BasePassengerCarriage;
 import com.andreev.transport.train.SimpleTrain;
 
-public class TrainSorter {
+public class SimpleTrainSorter {
 	
 	public static void sort(SimpleTrain train, Comparator<BaseCarriage> comparator) {
-		Collections.sort(train.getTrain(), comparator);
+		Collections.sort(train.getTrainList(), comparator);
 	}
 	
 	public static Comparator<BaseCarriage> TypeComparator = new Comparator<BaseCarriage>() {

@@ -10,7 +10,7 @@ public abstract class BaseLocomotive extends BaseCarriage {
 		return maxSpeed;
 	}
 
-	public void setMaxSpeed(int maxSpeed) {
+	public void setMaxSpeed(int maxSpeed) throws OutOfRangeExeption {
 		if (maxSpeed >= 0) {
 			this.maxSpeed = maxSpeed;
 		} else

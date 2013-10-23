@@ -20,7 +20,7 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		return comfortType;
 	}
 
-	public void setComfortType(int comfortType) {
+	public void setComfortType(int comfortType) throws OutOfRangeExeption {
 		if ((comfortType >= 0) && (comfortType <= COMFORT_TYPE_COUNT)) {
 			this.comfortType = comfortType;
 		} else
@@ -33,7 +33,7 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		return passengerCurCount;
 	}
 
-	public void setPassengerCurCount(int passengerCount) {
+	public void setPassengerCurCount(int passengerCount) throws OutOfRangeExeption {
 		if ((passengerCount >= 0) && (passengerCount <= this.passengerMaxCount)) {
 			this.passengerCurCount = passengerCount;
 		} else
@@ -46,7 +46,7 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		return passengerMaxCount;
 	}
 
-	public void setPassengerMaxCount(int passengerMaxCount) {
+	public void setPassengerMaxCount(int passengerMaxCount) throws OutOfRangeExeption {
 		if (passengerMaxCount >= 0) {
 			this.passengerMaxCount = passengerMaxCount;
 		} else
@@ -58,7 +58,7 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		return baggageCurWeight;
 	}
 
-	public void setBaggageCurWeight(int baggageCurWeight) {
+	public void setBaggageCurWeight(int baggageCurWeight) throws OutOfRangeExeption {
 		if ((baggageCurWeight >= 0)
 				&& (baggageCurWeight <= baggageMaxWeight)) {
 			this.baggageCurWeight = baggageCurWeight;
@@ -72,7 +72,7 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		return baggageMaxWeight;
 	}
 
-	public void setBaggageMaxWeight(int baggageMaxWeight) {
+	public void setBaggageMaxWeight(int baggageMaxWeight) throws OutOfRangeExeption {
 		if (baggageMaxWeight >= 0) {
 			this.baggageMaxWeight = baggageMaxWeight;
 		} else

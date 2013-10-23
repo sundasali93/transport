@@ -2,6 +2,7 @@ package com.andreev.transport.carriage.factory;
 
 import java.util.Date;
 
+import com.andreev.exeption.OutOfRangeExeption;
 import com.andreev.transport.carriage.BaseCarriage;
 import com.andreev.transport.carriage.CoachCarriage;
 import com.andreev.transport.carriage.DiningCarriage;
@@ -17,7 +18,7 @@ public class PassengerCarriageFactory extends BaseCarriageFactory {
 
 	public static BaseCarriage getCarriage(int type, String carriageNumber,
 			Date productionDate, int carriageWeight, int comfortType,
-			int passengerMaxCount, int baggageMaxWeight) {
+			int passengerMaxCount, int baggageMaxWeight) throws OutOfRangeExeption {
 		BaseCarriage carriage;
 		if (type == TYPE_COACH) {
 			carriage = new CoachCarriage(getId(), carriageNumber,
@@ -32,7 +33,7 @@ public class PassengerCarriageFactory extends BaseCarriageFactory {
 					productionDate, carriageWeight, comfortType,
 					passengerMaxCount);
 		} else
-			throw new IllegalArgumentException("Carriage type is incorrect");
+			throw new OutOfRangeExeption("Carriage type is incorrect");
 		return carriage;
 	}
 }

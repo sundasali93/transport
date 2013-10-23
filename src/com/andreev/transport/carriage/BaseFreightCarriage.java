@@ -11,7 +11,7 @@ public abstract class BaseFreightCarriage extends BaseCarriage {
 		return maxCapacity;
 	}
 
-	protected void setMaxCapacity(int maxCapacity) {
+	protected void setMaxCapacity(int maxCapacity) throws OutOfRangeExeption {
 		if (maxCapacity >= 0) {
 			this.maxCapacity = maxCapacity;
 		} else
@@ -22,7 +22,7 @@ public abstract class BaseFreightCarriage extends BaseCarriage {
 		return curCapacity;
 	}
 
-	public void setCurCapacity(int curCapacity) {
+	public void setCurCapacity(int curCapacity) throws OutOfRangeExeption {
 		if ((curCapacity <= this.maxCapacity) && (curCapacity >= 0)) {
 			this.curCapacity = curCapacity;
 		} else

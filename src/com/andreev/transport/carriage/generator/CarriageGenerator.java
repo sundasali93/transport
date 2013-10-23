@@ -3,6 +3,7 @@ package com.andreev.transport.carriage.generator;
 import java.util.Date;
 import java.util.Random;
 
+import com.andreev.exeption.OutOfRangeExeption;
 import com.andreev.transport.carriage.BaseCarriage;
 import com.andreev.transport.carriage.BaseFreightCarriage;
 import com.andreev.transport.carriage.BasePassengerCarriage;
@@ -14,7 +15,7 @@ public class CarriageGenerator {
 
 	public static Random random = new Random();
 
-	public static BaseCarriage getLocomotive() {
+	public static BaseCarriage getLocomotive() throws OutOfRangeExeption {
 		BaseCarriage carriage = LocomotiveFactory.getCarriage(
 				random.nextInt(LocomotiveFactory.TYPE_COUNT) + 1, 
 				getNumber(),
@@ -24,7 +25,7 @@ public class CarriageGenerator {
 		return carriage;
 	}
 
-	public static BaseCarriage getFreightCarriage() {
+	public static BaseCarriage getFreightCarriage() throws OutOfRangeExeption {
 		BaseCarriage carriage = FreightCarriageFactory.getCarriage(
 				random.nextInt(FreightCarriageFactory.TYPE_COUNT) + 1,
 				getNumber(), 
@@ -36,7 +37,7 @@ public class CarriageGenerator {
 		return carriage;
 	}
 
-	public static BaseCarriage getPassengerCarriage() {
+	public static BaseCarriage getPassengerCarriage() throws OutOfRangeExeption {
 		BaseCarriage carriage = PassengerCarriageFactory.getCarriage(
 				random.nextInt(PassengerCarriageFactory.TYPE_COUNT) + 1,
 				getNumber(), 

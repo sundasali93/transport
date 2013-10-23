@@ -15,7 +15,7 @@ public abstract class BaseCarriage {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(int id) throws OutOfRangeExeption {
 		if (id >= 0)
 			this.id = id;
 		else
@@ -26,7 +26,7 @@ public abstract class BaseCarriage {
 		return carriageWeight;
 	}
 
-	public void setCarriageWeight(int carriageWeight) {
+	public void setCarriageWeight(int carriageWeight) throws OutOfRangeExeption {
 		if (carriageWeight > 0)
 			this.carriageWeight = carriageWeight;
 		else
@@ -41,7 +41,7 @@ public abstract class BaseCarriage {
 		if (carriageNumber != null) {
 			this.carriageNumber = carriageNumber;
 		} else
-			throw new NullPointerException("Carriage number is null");
+			throw new IllegalArgumentException("Carriage number is null");
 	}
 
 	public Date getProductionDate() {
@@ -52,7 +52,7 @@ public abstract class BaseCarriage {
 		if (productionDate != null) {
 			this.productionDate = productionDate;
 		} else
-			throw new NullPointerException("Product date is null");
+			throw new IllegalArgumentException("Product date is null");
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.andreev.transport.carriage.factory;
 
 import java.util.Date;
 
+import com.andreev.exeption.OutOfRangeExeption;
 import com.andreev.transport.carriage.BaseCarriage;
 import com.andreev.transport.carriage.DieselLocomotive;
 import com.andreev.transport.carriage.ElectricLocomotive;
@@ -14,7 +15,7 @@ public class LocomotiveFactory extends BaseCarriageFactory {
 	public final static int TYPE_DIESEL = 2;
 
 	public static BaseCarriage getCarriage(int type, String carriageNumber,
-			Date productionDate, int carriageWeight, int maxSpeed) {
+			Date productionDate, int carriageWeight, int maxSpeed) throws OutOfRangeExeption {
 		BaseCarriage carriage;
 		if (type == TYPE_ELECTRIC) {
 			carriage = new ElectricLocomotive(getId(), carriageNumber,
@@ -23,7 +24,7 @@ public class LocomotiveFactory extends BaseCarriageFactory {
 			carriage = new DieselLocomotive(getId(), carriageNumber,
 					productionDate, carriageWeight, maxSpeed);
 		} else
-			throw new IllegalArgumentException("Carriage type is incorrect");
+			throw new OutOfRangeExeption("Carriage type is incorrect");
 		return carriage;
 	}
 
