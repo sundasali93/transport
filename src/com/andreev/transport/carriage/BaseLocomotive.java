@@ -1,5 +1,7 @@
 package com.andreev.transport.carriage;
 
+import com.andreev.exeption.OutOfRangeExeption;
+
 public abstract class BaseLocomotive extends BaseCarriage {
 
 	private int maxSpeed;
@@ -12,7 +14,7 @@ public abstract class BaseLocomotive extends BaseCarriage {
 		if (maxSpeed >= 0) {
 			this.maxSpeed = maxSpeed;
 		} else
-			throw new IllegalArgumentException("Maximum speed is under zero");
+			throw new OutOfRangeExeption("Maximum speed is under zero");
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.andreev.transport.carriage;
 
+import com.andreev.exeption.OutOfRangeExeption;
+
 public abstract class BaseFreightCarriage extends BaseCarriage {
 
 	private int maxCapacity;
@@ -13,7 +15,7 @@ public abstract class BaseFreightCarriage extends BaseCarriage {
 		if (maxCapacity >= 0) {
 			this.maxCapacity = maxCapacity;
 		} else
-			throw new IllegalArgumentException("Maximum capacity is under zero");
+			throw new OutOfRangeExeption("Maximum capacity is under zero");
 	}
 
 	public int getCurCapacity() {
@@ -24,7 +26,7 @@ public abstract class BaseFreightCarriage extends BaseCarriage {
 		if ((curCapacity <= this.maxCapacity) && (curCapacity >= 0)) {
 			this.curCapacity = curCapacity;
 		} else
-			throw new IllegalArgumentException(
+			throw new OutOfRangeExeption(
 					"Current capacity is out of range [0, " 
 							+ this.maxCapacity + "]");
 	}

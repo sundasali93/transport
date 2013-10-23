@@ -12,13 +12,13 @@ public class SimpleTrainGenerator {
 	public static SimpleTrain getTrain(int locomotiveCount, int passengerCount, int freightCount){
 		SimpleTrain train = new SimpleTrain();
 		for(int i = 0; i < locomotiveCount; i++){
-			train.add(CarriageGenerator.getLocomotive());
+			train.getTrain().add(CarriageGenerator.getLocomotive());
 		}
 		for(int i = 0; i < passengerCount; i++){
-			train.add(CarriageGenerator.getPassengerCarriage());
+			train.getTrain().add(CarriageGenerator.getPassengerCarriage());
 		}
 		for(int i = 0; i < freightCount; i++){
-			train.add(CarriageGenerator.getFreightCarriage());
+			train.getTrain().add(CarriageGenerator.getFreightCarriage());
 		}
 		return train;
 	}

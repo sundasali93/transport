@@ -1,20 +1,26 @@
 package com.andreev.transport.console;
 
-import java.util.Iterator;
-
 import com.andreev.transport.carriage.BaseCarriage;
 import com.andreev.transport.train.SimpleTrain;
 import com.andreev.transport.train.generator.SimpleTrainGenerator;
+import com.andreev.transport.train.utils.TrainSorter;
 
 
 public class Main {
 
 	public static void main(String[] args) {
 		SimpleTrain train = SimpleTrainGenerator.getTrain();
-		Iterator<BaseCarriage> iterator = train.iterator();
-		while(iterator.hasNext()){
-			System.out.println(iterator.next());
+		showTrain(train);
+		TrainSorter.sort(train, TrainSorter.TypeComparator);
+		showTrain(train);
+	}
+	
+	public static void showTrain(SimpleTrain train){
+		System.out.println("----------------------------------");
+		for(BaseCarriage bc : train.getTrain()){
+			System.out.println(bc);
 		}
+		System.out.println("----------------------------------");
 	}
 
 }

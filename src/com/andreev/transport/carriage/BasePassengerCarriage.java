@@ -1,5 +1,7 @@
 package com.andreev.transport.carriage;
 
+import com.andreev.exeption.OutOfRangeExeption;
+
 public abstract class BasePassengerCarriage extends BaseCarriage {
 
 	public final static int COMFORT_TYPE_COUNT = 3;
@@ -22,7 +24,7 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		if ((comfortType >= 0) && (comfortType <= COMFORT_TYPE_COUNT)) {
 			this.comfortType = comfortType;
 		} else
-			throw new IllegalArgumentException(
+			throw new OutOfRangeExeption(
 					"Comfort type is out of range [0, "
 							+ COMFORT_TYPE_COUNT + "]");
 	}
@@ -32,10 +34,10 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 	}
 
 	public void setPassengerCurCount(int passengerCount) {
-		if ((passengerCount >= 0) && (passengerCount >= this.passengerMaxCount)) {
+		if ((passengerCount >= 0) && (passengerCount <= this.passengerMaxCount)) {
 			this.passengerCurCount = passengerCount;
 		} else
-			throw new IllegalArgumentException(
+			throw new OutOfRangeExeption(
 					"Current passenger count is out of range [0,"
 							+ this.passengerMaxCount + "]");
 	}
@@ -48,7 +50,7 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		if (passengerMaxCount >= 0) {
 			this.passengerMaxCount = passengerMaxCount;
 		} else
-			throw new IllegalArgumentException(
+			throw new OutOfRangeExeption(
 					"Maximum passenger count is under zero");
 	}
 
@@ -58,10 +60,10 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 
 	public void setBaggageCurWeight(int baggageCurWeight) {
 		if ((baggageCurWeight >= 0)
-				&& (baggageCurWeight >= this.baggageMaxWeight)) {
+				&& (baggageCurWeight <= baggageMaxWeight)) {
 			this.baggageCurWeight = baggageCurWeight;
 		} else
-			throw new IllegalArgumentException(
+			throw new OutOfRangeExeption(
 					"Current baggage  weight is out of range [0,"
 							+ this.passengerMaxCount + "]");
 	}
@@ -74,7 +76,7 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		if (baggageMaxWeight >= 0) {
 			this.baggageMaxWeight = baggageMaxWeight;
 		} else
-			throw new IllegalArgumentException(
+			throw new OutOfRangeExeption(
 					"Maximum baggage weight is under zero");
 	}
 

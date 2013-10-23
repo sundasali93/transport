@@ -2,6 +2,8 @@ package com.andreev.transport.carriage;
 
 import java.util.Date;
 
+import com.andreev.exeption.OutOfRangeExeption;
+
 public abstract class BaseCarriage {
 
 	private int id;
@@ -17,7 +19,7 @@ public abstract class BaseCarriage {
 		if (id >= 0)
 			this.id = id;
 		else
-			throw new IllegalArgumentException("Id is under zero");
+			throw new OutOfRangeExeption("Id is under zero");
 	}
 
 	public int getCarriageWeight() {
@@ -28,7 +30,7 @@ public abstract class BaseCarriage {
 		if (carriageWeight > 0)
 			this.carriageWeight = carriageWeight;
 		else
-			throw new IllegalArgumentException("Carriage weight is under zero");
+			throw new OutOfRangeExeption("Carriage weight is under zero");
 	}
 
 	public String getCarriageNumber() {
