@@ -3,38 +3,40 @@ package com.andreev.transport.train.utils;
 import java.util.Collections;
 import java.util.Comparator;
 
-import com.andreev.transport.carriage.BaseCarriage;
-import com.andreev.transport.carriage.BaseFreightCarriage;
-import com.andreev.transport.carriage.BaseLocomotive;
-import com.andreev.transport.carriage.BasePassengerCarriage;
+import com.andreev.transport.carriage.AbstractCarriage;
+import com.andreev.transport.carriage.AbstractFreightCarriage;
+import com.andreev.transport.carriage.AbstractLocomotive;
+import com.andreev.transport.carriage.AbstractPassengerCarriage;
 import com.andreev.transport.train.SimpleTrain;
 
 public class SimpleTrainSorter {
-	
-	public static void sort(SimpleTrain train, Comparator<BaseCarriage> comparator) {
+
+	public static void sort(SimpleTrain train,
+			Comparator<AbstractCarriage> comparator) {
 		Collections.sort(train.getTrainList(), comparator);
 	}
-	
-	public static Comparator<BaseCarriage> TypeComparator = new Comparator<BaseCarriage>() {
+
+	public static Comparator<AbstractCarriage> TypeComparator = new Comparator<AbstractCarriage>() {
 		@Override
-		public int compare(BaseCarriage bc1, BaseCarriage bc2) {
-			if (bc1 instanceof BasePassengerCarriage) {
-				if (bc2 instanceof BasePassengerCarriage) {
-					return compareType(
-							((BasePassengerCarriage) bc1).getComfortType().getId(),
-							((BasePassengerCarriage) bc2).getComfortType().getId());
-				} else if (bc2 instanceof BaseFreightCarriage) {
+		public int compare(AbstractCarriage ac1, AbstractCarriage ac2) {
+			if (ac1 instanceof AbstractPassengerCarriage) {
+				if (ac2 instanceof AbstractPassengerCarriage) {
+					return compareType(((AbstractPassengerCarriage) ac1)
+							.getComfortType().getId(),
+							((AbstractPassengerCarriage) ac2).getComfortType()
+									.getId());
+				} else if (ac2 instanceof AbstractFreightCarriage) {
 					return 1;
-				} else if (bc2 instanceof BaseLocomotive) {
+				} else if (ac2 instanceof AbstractLocomotive) {
 					return -1;
 				}
-			} else if (bc1 instanceof BaseFreightCarriage){
-				if(bc2 instanceof BaseFreightCarriage)
+			} else if (ac1 instanceof AbstractFreightCarriage) {
+				if (ac2 instanceof AbstractFreightCarriage)
 					return 0;
 				else
 					return 1;
 			} else {
-				if(bc2 instanceof BaseLocomotive)
+				if (ac2 instanceof AbstractLocomotive)
 					return 0;
 				else
 					return -1;

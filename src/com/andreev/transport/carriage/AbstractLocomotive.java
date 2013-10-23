@@ -1,8 +1,8 @@
 package com.andreev.transport.carriage;
 
-import com.andreev.exeption.OutOfRangeExeption;
+import com.andreev.exception.OutOfRangeException;
 
-public abstract class BaseLocomotive extends BaseCarriage {
+public abstract class AbstractLocomotive extends AbstractCarriage {
 
 	private int maxSpeed;
 
@@ -10,11 +10,11 @@ public abstract class BaseLocomotive extends BaseCarriage {
 		return maxSpeed;
 	}
 
-	public void setMaxSpeed(int maxSpeed) throws OutOfRangeExeption {
+	public void setMaxSpeed(int maxSpeed) throws OutOfRangeException {
 		if (maxSpeed >= 0) {
 			this.maxSpeed = maxSpeed;
 		} else
-			throw new OutOfRangeExeption("Maximum speed is under zero");
+			throw new OutOfRangeException("Maximum speed is under zero");
 	}
 
 	@Override
@@ -31,9 +31,9 @@ public abstract class BaseLocomotive extends BaseCarriage {
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (!(obj instanceof BaseLocomotive))
+		if (!(obj instanceof AbstractLocomotive))
 			return false;
-		BaseLocomotive other = (BaseLocomotive) obj;
+		AbstractLocomotive other = (AbstractLocomotive) obj;
 		if (maxSpeed != other.maxSpeed)
 			return false;
 		return true;

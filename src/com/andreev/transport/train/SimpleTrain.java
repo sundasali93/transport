@@ -1,35 +1,23 @@
 package com.andreev.transport.train;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.andreev.exeption.OutOfRangeExeption;
-import com.andreev.transport.carriage.BaseCarriage;
+import com.andreev.exception.OutOfRangeException;
+import com.andreev.transport.carriage.AbstractCarriage;
 
 public class SimpleTrain {
 	
 	private int id;
 	private int number;
-	private List<BaseCarriage> trainList = new LinkedList<>();
+	private List<AbstractCarriage> trainList = new ArrayList<>();
 	
-	public SimpleTrain(int id, int number) throws OutOfRangeExeption {
+	public SimpleTrain(int id, int number) throws OutOfRangeException {
 		setId(id);
 		setNumber(number);
 	}
 	
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("SimpleTrain [ID = " + getId() + 
-					", Number = " + getNumber() + "]: {\n");
-		for(BaseCarriage bc : getTrainList()){
-			sb.append("  " + bc + "\n");
-		}
-		sb.append("}\n");
-		return sb.toString();
-	}
-	
-	public List<BaseCarriage> getTrainList() {
+	public List<AbstractCarriage> getTrainList() {
 		return trainList;
 	}
 
@@ -37,22 +25,34 @@ public class SimpleTrain {
 		return id;
 	}
 
-	private void setId(int id) throws OutOfRangeExeption {
+	private void setId(int id) throws OutOfRangeException {
 		if(id > 0)
 			this.id = id;
 		else
-			throw new OutOfRangeExeption("Id is under zero");
+			throw new OutOfRangeException("Id is under zero");
 	}
 
 	public int getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) throws OutOfRangeExeption {
+	public void setNumber(int number) throws OutOfRangeException {
 		if(number > 0)
 			this.number = number;
 		else
-			throw new OutOfRangeExeption("Id is under zero");
+			throw new OutOfRangeException("Id is under zero");
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SimpleTrain [ID = " + getId() + 
+					", Number = " + getNumber() + "]: {\n");
+		for(AbstractCarriage ac : getTrainList()){
+			sb.append("  " + ac + "\n");
+		}
+		sb.append("}\n");
+		return sb.toString();
 	}
 
 	@Override

@@ -2,12 +2,12 @@ package com.andreev.transport.carriage;
 
 import java.util.Date;
 
-import com.andreev.exeption.OutOfRangeExeption;
+import com.andreev.exception.OutOfRangeException;
 
-public class BaggageCarriage extends BaseFreightCarriage {
+public class BaggageCarriage extends AbstractFreightCarriage {
 
 	public BaggageCarriage(int id, String carriageNumber, Date productionDate,
-			int carriageWeight, int maxCapacity) throws OutOfRangeExeption {
+			int carriageWeight, int maxCapacity) throws OutOfRangeException {
 		setId(id);
 		setCarriageNumber(carriageNumber);
 		setProductionDate(productionDate);

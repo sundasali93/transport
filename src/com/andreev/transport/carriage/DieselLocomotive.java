@@ -2,12 +2,12 @@ package com.andreev.transport.carriage;
 
 import java.util.Date;
 
-import com.andreev.exeption.OutOfRangeExeption;
+import com.andreev.exception.OutOfRangeException;
 
-public class DieselLocomotive extends BaseLocomotive {
+public class DieselLocomotive extends AbstractLocomotive {
 	
 	public DieselLocomotive(int id, String carriageNumber, Date productionDate,
-			int carriageWeight, int maxSpeed) throws OutOfRangeExeption {
+			int carriageWeight, int maxSpeed) throws OutOfRangeException {
 		setId(id);
 		setCarriageNumber(carriageNumber);
 		setProductionDate(productionDate);

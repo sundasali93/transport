@@ -2,9 +2,9 @@ package com.andreev.transport.carriage;
 
 import java.util.Date;
 
-import com.andreev.exeption.OutOfRangeExeption;
+import com.andreev.exception.OutOfRangeException;
 
-public abstract class BaseCarriage {
+public abstract class AbstractCarriage {
 
 	private int id;
 	private int carriageWeight;
@@ -15,22 +15,22 @@ public abstract class BaseCarriage {
 		return id;
 	}
 
-	public void setId(int id) throws OutOfRangeExeption {
+	public void setId(int id) throws OutOfRangeException {
 		if (id >= 0)
 			this.id = id;
 		else
-			throw new OutOfRangeExeption("Id is under zero");
+			throw new OutOfRangeException("Id is under zero");
 	}
 
 	public int getCarriageWeight() {
 		return carriageWeight;
 	}
 
-	public void setCarriageWeight(int carriageWeight) throws OutOfRangeExeption {
+	public void setCarriageWeight(int carriageWeight) throws OutOfRangeException {
 		if (carriageWeight > 0)
 			this.carriageWeight = carriageWeight;
 		else
-			throw new OutOfRangeExeption("Carriage weight is under zero");
+			throw new OutOfRangeException("Carriage weight is under zero");
 	}
 
 	public String getCarriageNumber() {
@@ -74,9 +74,9 @@ public abstract class BaseCarriage {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof BaseCarriage))
+		if (!(obj instanceof AbstractCarriage))
 			return false;
-		BaseCarriage other = (BaseCarriage) obj;
+		AbstractCarriage other = (AbstractCarriage) obj;
 		if (carriageNumber == null) {
 			if (other.carriageNumber != null)
 				return false;

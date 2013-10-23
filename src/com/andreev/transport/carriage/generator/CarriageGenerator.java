@@ -3,13 +3,13 @@ package com.andreev.transport.carriage.generator;
 import java.util.Date;
 import java.util.Random;
 
-import com.andreev.exeption.OutOfRangeExeption;
-import com.andreev.transport.carriage.BaseCarriage;
-import com.andreev.transport.carriage.BaseFreightCarriage;
-import com.andreev.transport.carriage.BasePassengerCarriage;
-import com.andreev.transport.carriage.BasePassengerCarriage.ComfortType;
+import com.andreev.exception.OutOfRangeException;
+import com.andreev.transport.carriage.AbstractCarriage;
+import com.andreev.transport.carriage.AbstractFreightCarriage;
+import com.andreev.transport.carriage.AbstractPassengerCarriage;
+import com.andreev.transport.carriage.AbstractPassengerCarriage.ComfortType;
 import com.andreev.transport.carriage.factory.FreightCarriageFactory;
-import com.andreev.transport.carriage.factory.FreightCarriageFactory.FreightType;
+import com.andreev.transport.carriage.factory.FreightCarriageFactory.FreightCarType;
 import com.andreev.transport.carriage.factory.LocomotiveFactory;
 import com.andreev.transport.carriage.factory.LocomotiveFactory.LocomotiveType;
 import com.andreev.transport.carriage.factory.PassengerCarriageFactory;
@@ -17,11 +17,13 @@ import com.andreev.transport.carriage.factory.PassengerCarriageFactory.Passenger
 
 public class CarriageGenerator {
 
-	public static Random random = new Random();
+	private static Random random = new Random();
+	private static int idCount = 0;
 
-	public static BaseCarriage getLocomotive() throws OutOfRangeExeption {
-		BaseCarriage carriage = LocomotiveFactory.getCarriage(
+	public static AbstractCarriage getLocomotive() throws OutOfRangeException {
+		AbstractCarriage carriage = LocomotiveFactory.getCarriage(
 				new RandomEnum<LocomotiveType>(LocomotiveType.class).random(),
+				generateId(),
 				generateNumber(),
 				getnerateDate(), 
 				generateWeight(), 
@@ -29,32 +31,51 @@ public class CarriageGenerator {
 		return carriage;
 	}
 
-	public static BaseCarriage getFreightCarriage() throws OutOfRangeExeption {
-		BaseCarriage carriage = FreightCarriageFactory.getCarriage(
-				new RandomEnum<FreightType>(FreightType.class).random(),
+	public static AbstractCarriage getFreightCarriage() throws OutOfRangeException {
+		AbstractCarriage carriage = FreightCarriageFactory.getCarriage(
+				new RandomEnum<FreightCarType>(FreightCarType.class).random(),
+				generateId(),
 				generateNumber(), 
 				getnerateDate(), 
 				generateWeight(),
 				(random.nextInt(20) + 1) * 1000);
-		((BaseFreightCarriage) carriage).setCurCapacity(random
-				.nextInt(((BaseFreightCarriage) carriage).getMaxCapacity()));
+		((AbstractFreightCarriage) carriage).setCurCapacity(random
+				.nextInt(((AbstractFreightCarriage) carriage).getMaxCapacity()));
 		return carriage;
 	}
 
-	public static BaseCarriage getPassengerCarriage() throws OutOfRangeExeption {
-		BaseCarriage carriage = PassengerCarriageFactory.getCarriage(
+	public static AbstractCarriage getPassengerCarriage() throws OutOfRangeException {
+		AbstractCarriage carriage = PassengerCarriageFactory.getCarriage(
 				new RandomEnum<PassengerCarType>(PassengerCarType.class).random(),
+				generateId(),
 				generateNumber(), 
 				getnerateDate(), 
 				generateWeight(),
 				new RandomEnum<ComfortType>(ComfortType.class).random(),
 				random.nextInt(100) + 10, 
 				random.nextInt(1000) + 500);
-		((BasePassengerCarriage) carriage).setPassengerCurCount(random
-				.nextInt(((BasePassengerCarriage) carriage).getPassengerMaxCount()+ 1));
-		((BasePassengerCarriage) carriage).setBaggageCurWeight(random
-				.nextInt(((BasePassengerCarriage) carriage).getBaggageMaxWeight() + 1));
+		((AbstractPassengerCarriage) carriage).setPassengerCurCount(random
+				.nextInt(((AbstractPassengerCarriage) carriage).getPassengerMaxCount()+ 1));
+		((AbstractPassengerCarriage) carriage).setBaggageCurWeight(random
+				.nextInt(((AbstractPassengerCarriage) carriage).getBaggageMaxWeight() + 1));
 		return carriage;
+	}
+	
+	private static class RandomEnum<E extends Enum<E>> {
+
+        private final E[] values;
+
+        public RandomEnum(Class<E> token) {
+            values = token.getEnumConstants();
+        }
+
+        public E random() {
+            return values[random.nextInt(values.length)];
+        }
+    }
+	
+	private static int generateId(){
+		return ++idCount;
 	}
 
 	private static String generateNumber() {
@@ -69,18 +90,5 @@ public class CarriageGenerator {
 	private static int generateWeight() {
 		return random.nextInt(2000) + 3000;
 	}
-	
-	private static class RandomEnum<E extends Enum<?>> {
-
-        private final E[] values;
-
-        public RandomEnum(Class<E> token) {
-            values = token.getEnumConstants();
-        }
-
-        public E random() {
-            return values[random.nextInt(values.length)];
-        }
-    }
 
 }

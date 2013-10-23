@@ -2,29 +2,39 @@ package com.andreev.transport.carriage.factory;
 
 import java.util.Date;
 
-import com.andreev.exeption.OutOfRangeExeption;
+import org.apache.log4j.Logger;
+
+import com.andreev.exception.OutOfRangeException;
+import com.andreev.transport.carriage.AbstractCarriage;
 import com.andreev.transport.carriage.BaggageCarriage;
-import com.andreev.transport.carriage.BaseCarriage;
 
-public class FreightCarriageFactory extends BaseCarriageFactory {
+public class FreightCarriageFactory {
 
-	public enum FreightType{
+	public enum FreightCarType {
 		BAGGAGE(0);
 		private final int id;
-		private FreightType(int id){
+
+		private FreightCarType(int id) {
 			this.id = id;
 		}
-		public int getId() { return id; }
-	}
 
-	public static BaseCarriage getCarriage(FreightType type, String carriageNumber,
-			Date productionDate, int carriageWeight, int maxCapacity) throws OutOfRangeExeption {
-		BaseCarriage carriage;
-		if (type == FreightType.BAGGAGE) {
-			carriage = new BaggageCarriage(getId(), carriageNumber,
-					productionDate, carriageWeight, maxCapacity);
+		public int getId() {
+			return id;
+		}
+	}
+	
+	private static final Logger log = Logger.getLogger(FreightCarriageFactory.class);
+
+	public static AbstractCarriage getCarriage(FreightCarType type, int id,
+			String carriageNumber, Date productionDate, int carriageWeight,
+			int maxCapacity) throws OutOfRangeException {
+		AbstractCarriage carriage;
+		if (type == FreightCarType.BAGGAGE) {
+			carriage = new BaggageCarriage(id, carriageNumber, productionDate,
+					carriageWeight, maxCapacity);
 		} else
-			throw new OutOfRangeExeption("Carriage type is incorrect");
+			throw new OutOfRangeException("Carriage type is incorrect");
+		log.debug("New FreightCarriage: " + carriage);
 		return carriage;
 	}
 

@@ -1,16 +1,20 @@
 package com.andreev.transport.carriage;
 
-import com.andreev.exeption.OutOfRangeExeption;
+import com.andreev.exception.OutOfRangeException;
 
-public abstract class BasePassengerCarriage extends BaseCarriage {
+public abstract class AbstractPassengerCarriage extends AbstractCarriage {
 
 	public enum ComfortType {
 		PUBLIC(0), ECONOM(1), BUSINESS(2);
 		private final int id;
-		private ComfortType(int id){
+
+		private ComfortType(int id) {
 			this.id = id;
 		}
-		public int getId() { return id; }
+
+		public int getId() {
+			return id;
+		}
 	}
 
 	private ComfortType comfortType;
@@ -24,9 +28,9 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 	}
 
 	public void setComfortType(ComfortType comfortType)
-			throws OutOfRangeExeption {
+			throws OutOfRangeException {
 		if (comfortType == null)
-			throw new OutOfRangeExeption("Comfort type is null");
+			throw new OutOfRangeException("Comfort type is null");
 		this.comfortType = comfortType;
 
 	}
@@ -36,11 +40,11 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 	}
 
 	public void setPassengerCurCount(int passengerCount)
-			throws OutOfRangeExeption {
+			throws OutOfRangeException {
 		if ((passengerCount >= 0) && (passengerCount <= this.passengerMaxCount)) {
 			this.passengerCurCount = passengerCount;
 		} else
-			throw new OutOfRangeExeption(
+			throw new OutOfRangeException(
 					"Current passenger count is out of range [0,"
 							+ this.passengerMaxCount + "]");
 	}
@@ -50,11 +54,11 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 	}
 
 	public void setPassengerMaxCount(int passengerMaxCount)
-			throws OutOfRangeExeption {
+			throws OutOfRangeException {
 		if (passengerMaxCount >= 0) {
 			this.passengerMaxCount = passengerMaxCount;
 		} else
-			throw new OutOfRangeExeption(
+			throw new OutOfRangeException(
 					"Maximum passenger count is under zero");
 	}
 
@@ -63,11 +67,11 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 	}
 
 	public void setBaggageCurWeight(int baggageCurWeight)
-			throws OutOfRangeExeption {
+			throws OutOfRangeException {
 		if ((baggageCurWeight >= 0) && (baggageCurWeight <= baggageMaxWeight)) {
 			this.baggageCurWeight = baggageCurWeight;
 		} else
-			throw new OutOfRangeExeption(
+			throw new OutOfRangeException(
 					"Current baggage  weight is out of range [0,"
 							+ this.passengerMaxCount + "]");
 	}
@@ -77,11 +81,11 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 	}
 
 	public void setBaggageMaxWeight(int baggageMaxWeight)
-			throws OutOfRangeExeption {
+			throws OutOfRangeException {
 		if (baggageMaxWeight >= 0) {
 			this.baggageMaxWeight = baggageMaxWeight;
 		} else
-			throw new OutOfRangeExeption("Maximum baggage weight is under zero");
+			throw new OutOfRangeException("Maximum baggage weight is under zero");
 	}
 
 	@Override
@@ -103,9 +107,9 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (!(obj instanceof BasePassengerCarriage))
+		if (!(obj instanceof AbstractPassengerCarriage))
 			return false;
-		BasePassengerCarriage other = (BasePassengerCarriage) obj;
+		AbstractPassengerCarriage other = (AbstractPassengerCarriage) obj;
 		if (baggageCurWeight != other.baggageCurWeight)
 			return false;
 		if (baggageMaxWeight != other.baggageMaxWeight)

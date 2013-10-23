@@ -1,8 +1,8 @@
 package com.andreev.transport.carriage;
 
-import com.andreev.exeption.OutOfRangeExeption;
+import com.andreev.exception.OutOfRangeException;
 
-public abstract class BaseFreightCarriage extends BaseCarriage {
+public abstract class AbstractFreightCarriage extends AbstractCarriage {
 
 	private int maxCapacity;
 	private int curCapacity;
@@ -11,22 +11,22 @@ public abstract class BaseFreightCarriage extends BaseCarriage {
 		return maxCapacity;
 	}
 
-	protected void setMaxCapacity(int maxCapacity) throws OutOfRangeExeption {
+	protected void setMaxCapacity(int maxCapacity) throws OutOfRangeException {
 		if (maxCapacity >= 0) {
 			this.maxCapacity = maxCapacity;
 		} else
-			throw new OutOfRangeExeption("Maximum capacity is under zero");
+			throw new OutOfRangeException("Maximum capacity is under zero");
 	}
 
 	public int getCurCapacity() {
 		return curCapacity;
 	}
 
-	public void setCurCapacity(int curCapacity) throws OutOfRangeExeption {
+	public void setCurCapacity(int curCapacity) throws OutOfRangeException {
 		if ((curCapacity <= this.maxCapacity) && (curCapacity >= 0)) {
 			this.curCapacity = curCapacity;
 		} else
-			throw new OutOfRangeExeption(
+			throw new OutOfRangeException(
 					"Current capacity is out of range [0, " 
 							+ this.maxCapacity + "]");
 	}
@@ -46,9 +46,9 @@ public abstract class BaseFreightCarriage extends BaseCarriage {
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (!(obj instanceof BaseFreightCarriage))
+		if (!(obj instanceof AbstractFreightCarriage))
 			return false;
-		BaseFreightCarriage other = (BaseFreightCarriage) obj;
+		AbstractFreightCarriage other = (AbstractFreightCarriage) obj;
 		if (curCapacity != other.curCapacity)
 			return false;
 		if (maxCapacity != other.maxCapacity)
