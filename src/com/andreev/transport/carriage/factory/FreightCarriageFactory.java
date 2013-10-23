@@ -8,14 +8,19 @@ import com.andreev.transport.carriage.BaseCarriage;
 
 public class FreightCarriageFactory extends BaseCarriageFactory {
 
-	public final static int TYPE_COUNT = 1;
-	public final static int TYPE_IDLE = 0;
-	public final static int TYPE_BAGGAGE = 1;
+	public enum FreightType{
+		BAGGAGE(0);
+		private final int id;
+		private FreightType(int id){
+			this.id = id;
+		}
+		public int getId() { return id; }
+	}
 
-	public static BaseCarriage getCarriage(int type, String carriageNumber,
+	public static BaseCarriage getCarriage(FreightType type, String carriageNumber,
 			Date productionDate, int carriageWeight, int maxCapacity) throws OutOfRangeExeption {
 		BaseCarriage carriage;
-		if (type == TYPE_BAGGAGE) {
+		if (type == FreightType.BAGGAGE) {
 			carriage = new BaggageCarriage(getId(), carriageNumber,
 					productionDate, carriageWeight, maxCapacity);
 		} else

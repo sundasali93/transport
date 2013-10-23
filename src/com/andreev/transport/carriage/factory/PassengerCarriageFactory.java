@@ -4,31 +4,35 @@ import java.util.Date;
 
 import com.andreev.exeption.OutOfRangeExeption;
 import com.andreev.transport.carriage.BaseCarriage;
+import com.andreev.transport.carriage.BasePassengerCarriage.ComfortType;
 import com.andreev.transport.carriage.CoachCarriage;
 import com.andreev.transport.carriage.DiningCarriage;
 import com.andreev.transport.carriage.SlippingCarriage;
 
 public class PassengerCarriageFactory extends BaseCarriageFactory {
+	
+	public enum PassengerCarType{
+		COACH(0), SLIPPING(1), DININIG(2);
+		private final int id;
+		private PassengerCarType(int id){
+			this.id = id;
+		}
+		public int getId() { return id; }
+	}
 
-	public final static int TYPE_COUNT = 3;
-	public final static int TYPE_IDLE = 0;
-	public final static int TYPE_COACH = 1;
-	public final static int TYPE_SLIPPING = 2;
-	public final static int TYPE_DININIG = 3;
-
-	public static BaseCarriage getCarriage(int type, String carriageNumber,
-			Date productionDate, int carriageWeight, int comfortType,
+	public static BaseCarriage getCarriage(PassengerCarType type, String carriageNumber,
+			Date productionDate, int carriageWeight, ComfortType comfortType,
 			int passengerMaxCount, int baggageMaxWeight) throws OutOfRangeExeption {
 		BaseCarriage carriage;
-		if (type == TYPE_COACH) {
+		if (type == PassengerCarType.COACH) {
 			carriage = new CoachCarriage(getId(), carriageNumber,
 					productionDate, carriageWeight, comfortType,
 					passengerMaxCount, baggageMaxWeight);
-		} else if (type == TYPE_SLIPPING) {
+		} else if (type == PassengerCarType.SLIPPING) {
 			carriage = new SlippingCarriage(getId(), carriageNumber,
 					productionDate, carriageWeight, comfortType,
 					passengerMaxCount, baggageMaxWeight);
-		} else if (type == TYPE_DININIG) {
+		} else if (type == PassengerCarType.DININIG) {
 			carriage = new DiningCarriage(getId(), carriageNumber,
 					productionDate, carriageWeight, comfortType,
 					passengerMaxCount);

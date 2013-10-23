@@ -9,18 +9,22 @@ import com.andreev.transport.carriage.ElectricLocomotive;
 
 public class LocomotiveFactory extends BaseCarriageFactory {
 
-	public final static int TYPE_COUNT = 2;
-	public final static int TYPE_IDLE = 0;
-	public final static int TYPE_ELECTRIC = 1;
-	public final static int TYPE_DIESEL = 2;
+	public enum LocomotiveType{
+		ELECTRIC(0), DIESEL(1);
+		private final int id;
+		private LocomotiveType(int id){
+			this.id = id;
+		}
+		public int getId() { return id; }
+	}
 
-	public static BaseCarriage getCarriage(int type, String carriageNumber,
+	public static BaseCarriage getCarriage(LocomotiveType type, String carriageNumber,
 			Date productionDate, int carriageWeight, int maxSpeed) throws OutOfRangeExeption {
 		BaseCarriage carriage;
-		if (type == TYPE_ELECTRIC) {
+		if (type == LocomotiveType.ELECTRIC) {
 			carriage = new ElectricLocomotive(getId(), carriageNumber,
 					productionDate, carriageWeight, maxSpeed);
-		} else if (type == TYPE_DIESEL) {
+		} else if (type == LocomotiveType.DIESEL) {
 			carriage = new DieselLocomotive(getId(), carriageNumber,
 					productionDate, carriageWeight, maxSpeed);
 		} else

@@ -21,10 +21,11 @@ public class SimpleTrain {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SimpleTrain [ID = " + getId() + 
-					", Number = " + getNumber() + "]\n");
+					", Number = " + getNumber() + "]: {\n");
 		for(BaseCarriage bc : getTrainList()){
-			sb.append(bc + "\n");
+			sb.append("  " + bc + "\n");
 		}
+		sb.append("}\n");
 		return sb.toString();
 	}
 	

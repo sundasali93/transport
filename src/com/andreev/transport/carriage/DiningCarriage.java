@@ -7,7 +7,7 @@ import com.andreev.exeption.OutOfRangeExeption;
 public class DiningCarriage extends BasePassengerCarriage {
 	
 	public DiningCarriage(int id, String carriageNumber, Date productionDate,
-			int carriageWeight, int comfortType, int passengerMaxCount) throws OutOfRangeExeption {
+			int carriageWeight, ComfortType comfortType, int passengerMaxCount) throws OutOfRangeExeption {
 		setId(id);
 		setCarriageNumber(carriageNumber);
 		setProductionDate(productionDate);
@@ -23,7 +23,7 @@ public class DiningCarriage extends BasePassengerCarriage {
 		sb.append("DiningCarriage [");
 		sb.append("ID = " + getId() + ", ");
 		sb.append("Number = " + getCarriageNumber() + ", ");
-		sb.append("ComfortType = " + getComfortType() + ", ");
+		sb.append("ComfortType = " + getComfortType().name() + ", ");
 		sb.append("PassengerCount = " + getPassengerCurCount() 
 				+ "/" + getPassengerMaxCount());
 		sb.append("];");

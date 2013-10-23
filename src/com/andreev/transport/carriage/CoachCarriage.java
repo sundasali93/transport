@@ -7,8 +7,9 @@ import com.andreev.exeption.OutOfRangeExeption;
 public class CoachCarriage extends BasePassengerCarriage {
 
 	public CoachCarriage(int id, String carriageNumber, Date productionDate,
-			int carriageWeight, int comfortType, int passengerMaxCount,
-			int baggageMaxWeight) throws OutOfRangeExeption {
+			int carriageWeight, ComfortType comfortType,
+			int passengerMaxCount, int baggageMaxWeight)
+			throws OutOfRangeExeption {
 		setId(id);
 		setCarriageNumber(carriageNumber);
 		setProductionDate(productionDate);
@@ -24,11 +25,11 @@ public class CoachCarriage extends BasePassengerCarriage {
 		sb.append("CoachCarriage [");
 		sb.append("ID = " + getId() + ", ");
 		sb.append("Number = " + getCarriageNumber() + ", ");
-		sb.append("ComfortType = " + getComfortType() + ", ");
-		sb.append("PassengerCount = " + getPassengerCurCount() 
-				+ "/" + getPassengerMaxCount() + ", ");
-		sb.append("BaggageWeight = " + getBaggageCurWeight() 
-				+ "/" + getBaggageMaxWeight());
+		sb.append("ComfortType = " + getComfortType().name() + ", ");
+		sb.append("PassengerCount = " + getPassengerCurCount() + "/"
+				+ getPassengerMaxCount() + ", ");
+		sb.append("BaggageWeight = " + getBaggageCurWeight() + "/"
+				+ getBaggageMaxWeight());
 		sb.append("];");
 		return sb.toString();
 	}

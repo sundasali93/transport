@@ -21,8 +21,8 @@ public class SimpleTrainSorter {
 			if (bc1 instanceof BasePassengerCarriage) {
 				if (bc2 instanceof BasePassengerCarriage) {
 					return compareType(
-							((BasePassengerCarriage) bc1).getComfortType(),
-							((BasePassengerCarriage) bc2).getComfortType());
+							((BasePassengerCarriage) bc1).getComfortType().getId(),
+							((BasePassengerCarriage) bc2).getComfortType().getId());
 				} else if (bc2 instanceof BaseFreightCarriage) {
 					return 1;
 				} else if (bc2 instanceof BaseLocomotive) {

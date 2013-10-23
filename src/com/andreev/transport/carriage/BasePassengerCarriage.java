@@ -4,36 +4,39 @@ import com.andreev.exeption.OutOfRangeExeption;
 
 public abstract class BasePassengerCarriage extends BaseCarriage {
 
-	public final static int COMFORT_TYPE_COUNT = 3;
-	public final static int COMFORT_TYPE_IDLE = 0;
-	public final static int COMFORT_TYPE_PUBLIC = 1;
-	public final static int COMFORT_TYPE_ECONOM = 2;
-	public final static int COMFORT_TYPE_BUSINESS = 3;
+	public enum ComfortType {
+		PUBLIC(0), ECONOM(1), BUSINESS(2);
+		private final int id;
+		private ComfortType(int id){
+			this.id = id;
+		}
+		public int getId() { return id; }
+	}
 
-	private int comfortType;
+	private ComfortType comfortType;
 	private int passengerCurCount;
 	private int passengerMaxCount;
 	private int baggageCurWeight;
 	private int baggageMaxWeight;
 
-	public int getComfortType() {
+	public ComfortType getComfortType() {
 		return comfortType;
 	}
 
-	public void setComfortType(int comfortType) throws OutOfRangeExeption {
-		if ((comfortType >= 0) && (comfortType <= COMFORT_TYPE_COUNT)) {
-			this.comfortType = comfortType;
-		} else
-			throw new OutOfRangeExeption(
-					"Comfort type is out of range [0, "
-							+ COMFORT_TYPE_COUNT + "]");
+	public void setComfortType(ComfortType comfortType)
+			throws OutOfRangeExeption {
+		if (comfortType == null)
+			throw new OutOfRangeExeption("Comfort type is null");
+		this.comfortType = comfortType;
+
 	}
 
 	public int getPassengerCurCount() {
 		return passengerCurCount;
 	}
 
-	public void setPassengerCurCount(int passengerCount) throws OutOfRangeExeption {
+	public void setPassengerCurCount(int passengerCount)
+			throws OutOfRangeExeption {
 		if ((passengerCount >= 0) && (passengerCount <= this.passengerMaxCount)) {
 			this.passengerCurCount = passengerCount;
 		} else
@@ -46,7 +49,8 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		return passengerMaxCount;
 	}
 
-	public void setPassengerMaxCount(int passengerMaxCount) throws OutOfRangeExeption {
+	public void setPassengerMaxCount(int passengerMaxCount)
+			throws OutOfRangeExeption {
 		if (passengerMaxCount >= 0) {
 			this.passengerMaxCount = passengerMaxCount;
 		} else
@@ -58,9 +62,9 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		return baggageCurWeight;
 	}
 
-	public void setBaggageCurWeight(int baggageCurWeight) throws OutOfRangeExeption {
-		if ((baggageCurWeight >= 0)
-				&& (baggageCurWeight <= baggageMaxWeight)) {
+	public void setBaggageCurWeight(int baggageCurWeight)
+			throws OutOfRangeExeption {
+		if ((baggageCurWeight >= 0) && (baggageCurWeight <= baggageMaxWeight)) {
 			this.baggageCurWeight = baggageCurWeight;
 		} else
 			throw new OutOfRangeExeption(
@@ -72,12 +76,12 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		return baggageMaxWeight;
 	}
 
-	public void setBaggageMaxWeight(int baggageMaxWeight) throws OutOfRangeExeption {
+	public void setBaggageMaxWeight(int baggageMaxWeight)
+			throws OutOfRangeExeption {
 		if (baggageMaxWeight >= 0) {
 			this.baggageMaxWeight = baggageMaxWeight;
 		} else
-			throw new OutOfRangeExeption(
-					"Maximum baggage weight is under zero");
+			throw new OutOfRangeExeption("Maximum baggage weight is under zero");
 	}
 
 	@Override
@@ -86,7 +90,8 @@ public abstract class BasePassengerCarriage extends BaseCarriage {
 		int result = super.hashCode();
 		result = prime * result + baggageCurWeight;
 		result = prime * result + baggageMaxWeight;
-		result = prime * result + comfortType;
+		result = prime * result
+				+ ((comfortType == null) ? 0 : comfortType.hashCode());
 		result = prime * result + passengerCurCount;
 		result = prime * result + passengerMaxCount;
 		return result;
