@@ -20,7 +20,7 @@ public class CarriageGenerator {
 	private static int idCount = 0;
 
 	public static AbstractCarriage getLocomotive() throws OutOfRangeException {
-		AbstractCarriage carriage = LocomotiveFactory.getCarriage(
+		AbstractCarriage carriage = LocomotiveFactory.createCarriage(
 				new RandomEnum<LocomotiveType>(LocomotiveType.class).random(),
 				generateId(),
 				generateNumber(),
@@ -29,7 +29,7 @@ public class CarriageGenerator {
 	}
 
 	public static AbstractCarriage getFreightCarriage() throws OutOfRangeException {
-		AbstractCarriage carriage = FreightCarriageFactory.getCarriage(
+		AbstractCarriage carriage = FreightCarriageFactory.createCarriage(
 				new RandomEnum<FreightCarType>(FreightCarType.class).random(),
 				generateId(),
 				generateNumber(), 
@@ -40,7 +40,7 @@ public class CarriageGenerator {
 	}
 
 	public static AbstractCarriage getPassengerCarriage() throws OutOfRangeException {
-		AbstractCarriage carriage = PassengerCarriageFactory.getCarriage(
+		AbstractCarriage carriage = PassengerCarriageFactory.createCarriage(
 				new RandomEnum<PassengerCarType>(PassengerCarType.class).random(),
 				generateId(),
 				generateNumber(),

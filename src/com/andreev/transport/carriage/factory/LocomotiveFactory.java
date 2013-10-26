@@ -24,7 +24,7 @@ public class LocomotiveFactory {
 
 	private static final Logger log = Logger.getLogger(LocomotiveFactory.class);
 
-	public static AbstractCarriage getCarriage(LocomotiveType type, int id,
+	public static AbstractCarriage createCarriage(LocomotiveType type, int id,
 			String carriageNumber, int maxSpeed) throws OutOfRangeException {
 		AbstractCarriage carriage;
 		if (type == LocomotiveType.ELECTRIC) {
@@ -35,6 +35,11 @@ public class LocomotiveFactory {
 			throw new OutOfRangeException("Carriage type is incorrect");
 		log.debug("New Locomotive: " + carriage);
 		return carriage;
+	}
+	
+	public static AbstractCarriage createCarriage(LocomotiveType type, int id)
+			throws OutOfRangeException {
+		return createCarriage(type, id, "", 0);
 	}
 
 }

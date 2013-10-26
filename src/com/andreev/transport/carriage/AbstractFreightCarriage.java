@@ -15,7 +15,7 @@ public abstract class AbstractFreightCarriage extends AbstractCarriage {
 		return maxCapacity;
 	}
 
-	protected void setMaxCapacity(int maxCapacity) throws OutOfRangeException {
+	public void setMaxCapacity(int maxCapacity) throws OutOfRangeException {
 		if (maxCapacity >= 0) {
 			this.maxCapacity = maxCapacity;
 		} else

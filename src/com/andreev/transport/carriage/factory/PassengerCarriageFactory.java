@@ -27,8 +27,8 @@ public class PassengerCarriageFactory {
 	private static final Logger log = Logger
 			.getLogger(PassengerCarriageFactory.class);
 
-	public static AbstractCarriage getCarriage(PassengerCarType type, int id,
-			String carriageNumber, ComfortType comfortType,
+	public static AbstractCarriage createCarriage(PassengerCarType type,
+			int id, String carriageNumber, ComfortType comfortType,
 			int passengerMaxCount, int baggageMaxWeight)
 			throws OutOfRangeException {
 		AbstractCarriage carriage;
@@ -46,4 +46,10 @@ public class PassengerCarriageFactory {
 		log.debug("New PassengerCarriage: " + carriage);
 		return carriage;
 	}
+
+	public static AbstractCarriage createCarriage(PassengerCarType type, int id)
+			throws OutOfRangeException {
+		return createCarriage(type, id, "", ComfortType.PUBLIC, 0, 0);
+	}
+
 }
