@@ -21,10 +21,9 @@ public class SimpleTrainSorter {
 		public int compare(AbstractCarriage ac1, AbstractCarriage ac2) {
 			if (ac1 instanceof AbstractPassengerCarriage) {
 				if (ac2 instanceof AbstractPassengerCarriage) {
-					return compareType(((AbstractPassengerCarriage) ac1)
-							.getComfortType().getId(),
-							((AbstractPassengerCarriage) ac2).getComfortType()
-									.getId());
+					return compareType(
+							((AbstractPassengerCarriage) ac1).getComfortType().getId(),
+							((AbstractPassengerCarriage) ac2).getComfortType().getId());
 				} else if (ac2 instanceof AbstractFreightCarriage) {
 					return 1;
 				} else if (ac2 instanceof AbstractLocomotive) {

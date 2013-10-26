@@ -6,11 +6,11 @@ public abstract class AbstractFreightCarriage extends AbstractCarriage {
 
 	private int maxCapacity;
 	private int curCapacity;
-	
+
 	public AbstractFreightCarriage(int id) throws OutOfRangeException {
 		super(id);
 	}
-	
+
 	public int getMaxCapacity() {
 		return maxCapacity;
 	}
@@ -18,8 +18,9 @@ public abstract class AbstractFreightCarriage extends AbstractCarriage {
 	public void setMaxCapacity(int maxCapacity) throws OutOfRangeException {
 		if (maxCapacity >= 0) {
 			this.maxCapacity = maxCapacity;
-		} else
+		} else {
 			throw new OutOfRangeException("Maximum capacity is under zero");
+		}
 	}
 
 	public int getCurCapacity() {
@@ -29,10 +30,11 @@ public abstract class AbstractFreightCarriage extends AbstractCarriage {
 	public void setCurCapacity(int curCapacity) throws OutOfRangeException {
 		if ((curCapacity <= this.maxCapacity) && (curCapacity >= 0)) {
 			this.curCapacity = curCapacity;
-		} else
+		} else {
 			throw new OutOfRangeException(
-					"Current capacity is out of range [0, " 
-							+ this.maxCapacity + "]");
+					"Current capacity is out of range [0, " + this.maxCapacity
+							+ "]");
+		}
 	}
 
 	@Override
@@ -58,6 +60,6 @@ public abstract class AbstractFreightCarriage extends AbstractCarriage {
 		if (maxCapacity != other.maxCapacity)
 			return false;
 		return true;
-	}	
+	}
 
 }

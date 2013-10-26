@@ -5,7 +5,7 @@ import com.andreev.exception.OutOfRangeException;
 public abstract class AbstractLocomotive extends AbstractCarriage {
 
 	private int maxSpeed;
-	
+
 	public AbstractLocomotive(int id) throws OutOfRangeException {
 		super(id);
 	}
@@ -17,8 +17,9 @@ public abstract class AbstractLocomotive extends AbstractCarriage {
 	public void setMaxSpeed(int maxSpeed) throws OutOfRangeException {
 		if (maxSpeed >= 0) {
 			this.maxSpeed = maxSpeed;
-		} else
+		} else {
 			throw new OutOfRangeException("Maximum speed is under zero");
+		}
 	}
 
 	@Override

@@ -1,11 +1,12 @@
 package com.andreev.transport.carriage;
 
+import com.andreev.exception.NotNullException;
 import com.andreev.exception.OutOfRangeException;
 
 public class DieselLocomotive extends AbstractLocomotive {
 
 	public DieselLocomotive(int id, String carriageNumber, int maxSpeed)
-			throws OutOfRangeException {
+			throws OutOfRangeException, NotNullException {
 		super(id);
 		setCarriageNumber(carriageNumber);
 		setMaxSpeed(maxSpeed);

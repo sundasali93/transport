@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.andreev.exception.OutOfRangeException;
 import com.andreev.transport.carriage.generator.CarriageGenerator;
 import com.andreev.transport.train.SimpleTrain;
+import com.andreev.transport.train.factory.SimpleTrainFactory;
 
 public class SimpleTrainGenerator {
 
@@ -22,23 +23,19 @@ public class SimpleTrainGenerator {
 			int freightCount){
 		SimpleTrain train = null;
 		try {
-			train = new SimpleTrain(getId(), generateNumber() );
-		} catch (OutOfRangeException e1) {
-			log.error("Can't create new SimpleTrain", e1);
-			throw new RuntimeException(e1);
-		}
-		try {
-			for(int i = 0; i < locomotiveCount; i++){
-					train.add(CarriageGenerator.getLocomotive());
-			}
-			for(int i = 0; i < passengerCount; i++){
-				train.add(CarriageGenerator.getPassengerCarriage());
-			}
-			for(int i = 0; i < freightCount; i++){
-				train.add(CarriageGenerator.getFreightCarriage());
-			}
+			train = SimpleTrainFactory.newSimpleTrain(getId(), generateNumber() );
 		} catch (OutOfRangeException e) {
-			log.error("Can't generate carrieges", e);
+			log.error("Can't create new SimpleTrain", e);
+			throw new RuntimeException(e);
+		}		
+		for(int i = 0; i < locomotiveCount; i++){
+				train.add(CarriageGenerator.generateLocomotive());
+		}
+		for(int i = 0; i < passengerCount; i++){
+			train.add(CarriageGenerator.generatePassengerCarriage());
+		}
+		for(int i = 0; i < freightCount; i++){
+			train.add(CarriageGenerator.generateFreightCarriage());
 		}
 		log.debug("New SimpleTrain was generated");
 		return train;

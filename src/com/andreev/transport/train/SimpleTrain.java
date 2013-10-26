@@ -8,23 +8,24 @@ import com.andreev.transport.carriage.AbstractCarriage;
 public class SimpleTrain extends ArrayList<AbstractCarriage> {
 
 	private static final long serialVersionUID = 7530921635186056886L;
-	private int id;
+	private final int id;
 	private int number;
 
 	public SimpleTrain(int id, int number) throws OutOfRangeException {
-		setId(id);
+		if(id > 0) {
+			this.id = id;
+		} else {
+			throw new OutOfRangeException("Id is under zero");
+		}
 		setNumber(number);
+	}
+	
+	public SimpleTrain(int id) throws OutOfRangeException {
+		this(id, 0);
 	}
 
 	public int getId() {
 		return id;
-	}
-
-	private void setId(int id) throws OutOfRangeException {
-		if(id > 0)
-			this.id = id;
-		else
-			throw new OutOfRangeException("Id is under zero");
 	}
 
 	public int getNumber() {
@@ -32,10 +33,11 @@ public class SimpleTrain extends ArrayList<AbstractCarriage> {
 	}
 
 	public void setNumber(int number) throws OutOfRangeException {
-		if(number > 0)
+		if(number > 0) {
 			this.number = number;
-		else
+		} else {
 			throw new OutOfRangeException("Id is under zero");
+		}
 	}
 
 	@Override

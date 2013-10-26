@@ -2,6 +2,7 @@ package com.andreev.transport.carriage.factory;
 
 import org.apache.log4j.Logger;
 
+import com.andreev.exception.NotNullException;
 import com.andreev.exception.OutOfRangeException;
 import com.andreev.transport.carriage.AbstractCarriage;
 import com.andreev.transport.carriage.BaggageCarriage;
@@ -24,20 +25,25 @@ public class FreightCarriageFactory {
 	private static final Logger log = Logger
 			.getLogger(FreightCarriageFactory.class);
 
-	public static AbstractCarriage createCarriage(FreightCarType type, int id,
-			String carriageNumber, int maxCapacity) throws OutOfRangeException {
+	public static AbstractCarriage newCarriage(FreightCarType type, int id,
+			String carriageNumber, int maxCapacity) throws OutOfRangeException,
+			NotNullException {
 		AbstractCarriage carriage;
 		if (type == FreightCarType.BAGGAGE) {
 			carriage = new BaggageCarriage(id, carriageNumber, maxCapacity);
-		} else
-			throw new OutOfRangeException("Carriage type is incorrect");
+		} else {
+			NotNullException e = new NotNullException(
+					"Carriage type is incorrect");
+			log.error("FreightCarType is incorrect", e);
+			throw e;
+		}
 		log.debug("New FreightCarriage: " + carriage);
 		return carriage;
 	}
-	
-	public static AbstractCarriage createCarriage(FreightCarType type, int id)
-			throws OutOfRangeException {
-		return createCarriage(type, id, "", 0);
+
+	public static AbstractCarriage newCarriage(FreightCarType type, int id)
+			throws OutOfRangeException, NotNullException {
+		return newCarriage(type, id, "", 0);
 	}
 
 }

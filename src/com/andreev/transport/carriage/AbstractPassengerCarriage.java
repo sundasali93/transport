@@ -1,5 +1,6 @@
 package com.andreev.transport.carriage;
 
+import com.andreev.exception.NotNullException;
 import com.andreev.exception.OutOfRangeException;
 
 public abstract class AbstractPassengerCarriage extends AbstractCarriage {
@@ -22,7 +23,7 @@ public abstract class AbstractPassengerCarriage extends AbstractCarriage {
 	private int passengerMaxCount;
 	private int baggageCurWeight;
 	private int baggageMaxWeight;
-	
+
 	public AbstractPassengerCarriage(int id) throws OutOfRangeException {
 		super(id);
 	}
@@ -31,10 +32,10 @@ public abstract class AbstractPassengerCarriage extends AbstractCarriage {
 		return comfortType;
 	}
 
-	public void setComfortType(ComfortType comfortType)
-			throws OutOfRangeException {
-		if (comfortType == null)
-			throw new OutOfRangeException("Comfort type is null");
+	public void setComfortType(ComfortType comfortType) throws NotNullException {
+		if (comfortType == null) {
+			throw new NotNullException("Comfort type is null");
+		}
 		this.comfortType = comfortType;
 
 	}
@@ -47,10 +48,11 @@ public abstract class AbstractPassengerCarriage extends AbstractCarriage {
 			throws OutOfRangeException {
 		if ((passengerCount >= 0) && (passengerCount <= this.passengerMaxCount)) {
 			this.passengerCurCount = passengerCount;
-		} else
+		} else {
 			throw new OutOfRangeException(
 					"Current passenger count is out of range [0,"
 							+ this.passengerMaxCount + "]");
+		}
 	}
 
 	public int getPassengerMaxCount() {
@@ -61,9 +63,10 @@ public abstract class AbstractPassengerCarriage extends AbstractCarriage {
 			throws OutOfRangeException {
 		if (passengerMaxCount >= 0) {
 			this.passengerMaxCount = passengerMaxCount;
-		} else
+		} else {
 			throw new OutOfRangeException(
 					"Maximum passenger count is under zero");
+		}
 	}
 
 	public int getBaggageCurWeight() {
@@ -74,10 +77,11 @@ public abstract class AbstractPassengerCarriage extends AbstractCarriage {
 			throws OutOfRangeException {
 		if ((baggageCurWeight >= 0) && (baggageCurWeight <= baggageMaxWeight)) {
 			this.baggageCurWeight = baggageCurWeight;
-		} else
+		} else {
 			throw new OutOfRangeException(
 					"Current baggage  weight is out of range [0,"
 							+ this.passengerMaxCount + "]");
+		}
 	}
 
 	public int getBaggageMaxWeight() {
@@ -88,8 +92,10 @@ public abstract class AbstractPassengerCarriage extends AbstractCarriage {
 			throws OutOfRangeException {
 		if (baggageMaxWeight >= 0) {
 			this.baggageMaxWeight = baggageMaxWeight;
-		} else
-			throw new OutOfRangeException("Maximum baggage weight is under zero");
+		} else {
+			throw new OutOfRangeException(
+					"Maximum baggage weight is under zero");
+		}
 	}
 
 	@Override
