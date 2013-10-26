@@ -6,7 +6,11 @@ public abstract class AbstractFreightCarriage extends AbstractCarriage {
 
 	private int maxCapacity;
 	private int curCapacity;
-
+	
+	public AbstractFreightCarriage(int id) throws OutOfRangeException {
+		super(id);
+	}
+	
 	public int getMaxCapacity() {
 		return maxCapacity;
 	}

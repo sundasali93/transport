@@ -1,7 +1,5 @@
 package com.andreev.transport.carriage.factory;
 
-import java.util.Date;
-
 import org.apache.log4j.Logger;
 
 import com.andreev.exception.OutOfRangeException;
@@ -22,16 +20,15 @@ public class FreightCarriageFactory {
 			return id;
 		}
 	}
-	
-	private static final Logger log = Logger.getLogger(FreightCarriageFactory.class);
+
+	private static final Logger log = Logger
+			.getLogger(FreightCarriageFactory.class);
 
 	public static AbstractCarriage getCarriage(FreightCarType type, int id,
-			String carriageNumber, Date productionDate, int carriageWeight,
-			int maxCapacity) throws OutOfRangeException {
+			String carriageNumber, int maxCapacity) throws OutOfRangeException {
 		AbstractCarriage carriage;
 		if (type == FreightCarType.BAGGAGE) {
-			carriage = new BaggageCarriage(id, carriageNumber, productionDate,
-					carriageWeight, maxCapacity);
+			carriage = new BaggageCarriage(id, carriageNumber, maxCapacity);
 		} else
 			throw new OutOfRangeException("Carriage type is incorrect");
 		log.debug("New FreightCarriage: " + carriage);

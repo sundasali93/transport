@@ -5,6 +5,10 @@ import com.andreev.exception.OutOfRangeException;
 public abstract class AbstractLocomotive extends AbstractCarriage {
 
 	private int maxSpeed;
+	
+	public AbstractLocomotive(int id) throws OutOfRangeException {
+		super(id);
+	}
 
 	public int getMaxSpeed() {
 		return maxSpeed;

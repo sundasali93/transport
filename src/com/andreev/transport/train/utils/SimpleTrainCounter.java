@@ -9,7 +9,7 @@ public class SimpleTrainCounter {
 
 	public static int getPassengerCount(SimpleTrain train) {
 		int count = 0;
-		for (AbstractCarriage ac : train.getTrainList()) {
+		for (AbstractCarriage ac : train) {
 			if (ac instanceof AbstractPassengerCarriage) {
 				count += ((AbstractPassengerCarriage) ac).getPassengerCurCount();
 			}
@@ -19,7 +19,7 @@ public class SimpleTrainCounter {
 
 	public static int getBaggageCount(SimpleTrain train) {
 		int count = 0;
-		for (AbstractCarriage ac : train.getTrainList()) {
+		for (AbstractCarriage ac : train) {
 			if (ac instanceof AbstractPassengerCarriage) {
 				count += ((AbstractPassengerCarriage) ac).getBaggageCurWeight();
 			}else if (ac instanceof AbstractFreightCarriage){

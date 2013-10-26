@@ -1,19 +1,14 @@
 package com.andreev.transport.carriage;
 
-import java.util.Date;
-
 import com.andreev.exception.OutOfRangeException;
 
 public class CoachCarriage extends AbstractPassengerCarriage {
 
-	public CoachCarriage(int id, String carriageNumber, Date productionDate,
-			int carriageWeight, ComfortType comfortType,
-			int passengerMaxCount, int baggageMaxWeight)
+	public CoachCarriage(int id, String carriageNumber,
+			ComfortType comfortType, int passengerMaxCount, int baggageMaxWeight)
 			throws OutOfRangeException {
-		setId(id);
+		super(id);
 		setCarriageNumber(carriageNumber);
-		setProductionDate(productionDate);
-		setCarriageWeight(carriageWeight);
 		setComfortType(comfortType);
 		setPassengerMaxCount(passengerMaxCount);
 		setBaggageMaxWeight(baggageMaxWeight);

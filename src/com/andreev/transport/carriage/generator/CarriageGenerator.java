@@ -1,6 +1,5 @@
 package com.andreev.transport.carriage.generator;
 
-import java.util.Date;
 import java.util.Random;
 
 import com.andreev.exception.OutOfRangeException;
@@ -25,8 +24,6 @@ public class CarriageGenerator {
 				new RandomEnum<LocomotiveType>(LocomotiveType.class).random(),
 				generateId(),
 				generateNumber(),
-				getnerateDate(), 
-				generateWeight(), 
 				random.nextInt(150) + 30);
 		return carriage;
 	}
@@ -36,8 +33,6 @@ public class CarriageGenerator {
 				new RandomEnum<FreightCarType>(FreightCarType.class).random(),
 				generateId(),
 				generateNumber(), 
-				getnerateDate(), 
-				generateWeight(),
 				(random.nextInt(20) + 1) * 1000);
 		((AbstractFreightCarriage) carriage).setCurCapacity(random
 				.nextInt(((AbstractFreightCarriage) carriage).getMaxCapacity()));
@@ -48,9 +43,7 @@ public class CarriageGenerator {
 		AbstractCarriage carriage = PassengerCarriageFactory.getCarriage(
 				new RandomEnum<PassengerCarType>(PassengerCarType.class).random(),
 				generateId(),
-				generateNumber(), 
-				getnerateDate(), 
-				generateWeight(),
+				generateNumber(),
 				new RandomEnum<ComfortType>(ComfortType.class).random(),
 				random.nextInt(100) + 10, 
 				random.nextInt(1000) + 500);
@@ -81,14 +74,6 @@ public class CarriageGenerator {
 	private static String generateNumber() {
 		return String.valueOf((random.nextInt(9) + 1) * 1000
 				+ random.nextInt(999));
-	}
-
-	private static Date getnerateDate() {
-		return new Date();
-	}
-
-	private static int generateWeight() {
-		return random.nextInt(2000) + 3000;
 	}
 
 }

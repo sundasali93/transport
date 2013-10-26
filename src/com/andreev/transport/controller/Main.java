@@ -10,12 +10,12 @@ import com.andreev.transport.train.utils.SimpleTrainFinder;
 import com.andreev.transport.train.utils.SimpleTrainSorter;
 
 public class Main {
-	
+
 	private static final Logger log = Logger.getLogger(Main.class);
 
 	public static void main(String[] args) {
 		log.info("Application start");
-		
+
 		SimpleTrain train = SimpleTrainGenerator.getTrain();
 
 		System.out.println(train);

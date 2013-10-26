@@ -13,7 +13,7 @@ public class SimpleTrainSorter {
 
 	public static void sort(SimpleTrain train,
 			Comparator<AbstractCarriage> comparator) {
-		Collections.sort(train.getTrainList(), comparator);
+		Collections.sort(train, comparator);
 	}
 
 	public static Comparator<AbstractCarriage> TypeComparator = new Comparator<AbstractCarriage>() {

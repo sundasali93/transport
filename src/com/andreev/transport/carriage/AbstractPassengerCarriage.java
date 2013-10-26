@@ -22,6 +22,10 @@ public abstract class AbstractPassengerCarriage extends AbstractCarriage {
 	private int passengerMaxCount;
 	private int baggageCurWeight;
 	private int baggageMaxWeight;
+	
+	public AbstractPassengerCarriage(int id) throws OutOfRangeException {
+		super(id);
+	}
 
 	public ComfortType getComfortType() {
 		return comfortType;

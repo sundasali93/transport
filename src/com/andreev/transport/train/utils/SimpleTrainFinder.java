@@ -11,8 +11,8 @@ public class SimpleTrainFinder {
 
 	public static List<AbstractCarriage> findCarriages(SimpleTrain train,
 			int minPassengerCount, int maxPassengerCount) {
-		List<AbstractCarriage> list = new ArrayList<>();
-		for (AbstractCarriage ac : train.getTrainList()) {
+		List<AbstractCarriage> list = new ArrayList<AbstractCarriage>();
+		for (AbstractCarriage ac : train) {
 			if (ac instanceof AbstractPassengerCarriage) {
 				AbstractPassengerCarriage apc = (AbstractPassengerCarriage) ac;
 				if ((apc.getPassengerCurCount() >= minPassengerCount)

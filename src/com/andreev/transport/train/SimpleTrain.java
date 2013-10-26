@@ -1,24 +1,19 @@
 package com.andreev.transport.train;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.andreev.exception.OutOfRangeException;
 import com.andreev.transport.carriage.AbstractCarriage;
 
-public class SimpleTrain {
-	
+public class SimpleTrain extends ArrayList<AbstractCarriage> {
+
+	private static final long serialVersionUID = 7530921635186056886L;
 	private int id;
 	private int number;
-	private List<AbstractCarriage> trainList = new ArrayList<>();
-	
+
 	public SimpleTrain(int id, int number) throws OutOfRangeException {
 		setId(id);
 		setNumber(number);
-	}
-	
-	public List<AbstractCarriage> getTrainList() {
-		return trainList;
 	}
 
 	public int getId() {
@@ -42,13 +37,13 @@ public class SimpleTrain {
 		else
 			throw new OutOfRangeException("Id is under zero");
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SimpleTrain [ID = " + getId() + 
+		sb.append("SimpleTrain [ID = " + getId() +
 					", Number = " + getNumber() + "]: {\n");
-		for(AbstractCarriage ac : getTrainList()){
+		for(AbstractCarriage ac : this){
 			sb.append("  " + ac + "\n");
 		}
 		sb.append("}\n");
@@ -58,11 +53,9 @@ public class SimpleTrain {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + id;
 		result = prime * result + number;
-		result = prime * result
-				+ ((trainList == null) ? 0 : trainList.hashCode());
 		return result;
 	}
 
@@ -70,7 +63,7 @@ public class SimpleTrain {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (!(obj instanceof SimpleTrain))
 			return false;
@@ -79,12 +72,7 @@ public class SimpleTrain {
 			return false;
 		if (number != other.number)
 			return false;
-		if (trainList == null) {
-			if (other.trainList != null)
-				return false;
-		} else if (!trainList.equals(other.trainList))
-			return false;
 		return true;
 	}
-	
+
 }
