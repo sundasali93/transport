@@ -23,7 +23,8 @@ public abstract class AbstractCarriage {
 		return carriageNumber;
 	}
 
-	public void setCarriageNumber(String carriageNumber) {
+	public void setCarriageNumber(String carriageNumber)
+			throws NullArgumentException {
 		if (carriageNumber != null) {
 			this.carriageNumber = carriageNumber;
 		} else

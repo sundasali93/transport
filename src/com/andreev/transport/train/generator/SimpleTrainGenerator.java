@@ -13,21 +13,23 @@ public class SimpleTrainGenerator {
 
 	private static final Logger log = Logger.getLogger(SimpleTrainGenerator.class);
 
+	private static final int MAX_TRAIN_NUMBER = 999;
+
 	private static final int DEFAULT_LOCOMOTIVE_COUNT = 2;
 	private static final int DEFAULT_PASSENGER_COUNT = 10;
 	private static final int DEFAULT_FREIGHT_COUNT = 4;
 
 	private static int idCount = 0;
 
-	public static SimpleTrain getTrain(int locomotiveCount, int passengerCount,
+	public static SimpleTrain generateTrain(int locomotiveCount, int passengerCount,
 			int freightCount){
 		SimpleTrain train = null;
 		try {
-			train = SimpleTrainFactory.newSimpleTrain(getId(), generateNumber() );
+			train = SimpleTrainFactory.newSimpleTrain(generateId(), generateNumber() );
 		} catch (OutOfRangeException e) {
 			log.error("Can't create new SimpleTrain", e);
 			throw new RuntimeException(e);
-		}		
+		}
 		for(int i = 0; i < locomotiveCount; i++){
 				train.add(CarriageGenerator.generateLocomotive());
 		}
@@ -41,17 +43,17 @@ public class SimpleTrainGenerator {
 		return train;
 	}
 
-	public static SimpleTrain getTrain(){
-		return getTrain(DEFAULT_LOCOMOTIVE_COUNT, DEFAULT_PASSENGER_COUNT,
+	public static SimpleTrain generateTrain(){
+		return generateTrain(DEFAULT_LOCOMOTIVE_COUNT, DEFAULT_PASSENGER_COUNT,
 				DEFAULT_FREIGHT_COUNT);
 	}
 
-	private static int getId() {
+	private static int generateId() {
 		return ++idCount;
 	}
 
 	private static int generateNumber(){
-		return (new Random().nextInt(999)) + 1;
+		return (new Random().nextInt(MAX_TRAIN_NUMBER)) + 1;
 	}
 
 }

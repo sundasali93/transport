@@ -16,7 +16,7 @@ public class Main {
 	public static void main(String[] args) {
 		log.info("Application start");
 
-		SimpleTrain train = SimpleTrainGenerator.getTrain();
+		SimpleTrain train = SimpleTrainGenerator.generateTrain();
 
 		System.out.println(train);
 

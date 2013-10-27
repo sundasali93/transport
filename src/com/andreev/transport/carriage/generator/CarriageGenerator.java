@@ -18,11 +18,10 @@ import com.andreev.transport.carriage.factory.PassengerCarriageFactory.Passenger
 
 public class CarriageGenerator {
 
+	private static final Logger log = Logger.getLogger(CarriageGenerator.class);
+
 	private static Random random = new Random();
 	private static int idCount = 0;
-
-	private static final Logger log = Logger
-			.getLogger(CarriageGenerator.class);
 
 	public static AbstractCarriage generateLocomotive() {
 		try {
@@ -30,7 +29,7 @@ public class CarriageGenerator {
 					new RandomEnum<LocomotiveType>(LocomotiveType.class).random(),
 					generateId(),
 					generateNumber(),
-					random.nextInt(150) + 30);
+					generateMaxSpeed());
 			log.debug("New Locomotive was generaed: " + carriage);
 			return carriage;
 		} catch (OutOfRangeException e) {
@@ -45,7 +44,7 @@ public class CarriageGenerator {
 					new RandomEnum<FreightCarType>(FreightCarType.class).random(),
 					generateId(),
 					generateNumber(),
-					(random.nextInt(20) + 1) * 1000);
+					generateMaxCapacity());
 			((AbstractFreightCarriage) carriage).setCurCapacity(random
 					.nextInt(((AbstractFreightCarriage) carriage).getMaxCapacity()));
 			log.debug("New FreightCarriage was generaed: " + carriage);
@@ -63,8 +62,8 @@ public class CarriageGenerator {
 					generateId(),
 					generateNumber(),
 					new RandomEnum<ComfortType>(ComfortType.class).random(),
-					random.nextInt(100) + 10,
-					random.nextInt(1000) + 500);
+					generatePessangerMaxCount(),
+					generateBaggageMaxWeight());
 			((AbstractPassengerCarriage) carriage).setPassengerCurCount(random
 					.nextInt(((AbstractPassengerCarriage) carriage).getPassengerMaxCount()+ 1));
 			((AbstractPassengerCarriage) carriage).setBaggageCurWeight(random
@@ -92,6 +91,22 @@ public class CarriageGenerator {
 
 	private static int generateId(){
 		return ++idCount;
+	}
+
+	private static int generateMaxSpeed() {
+		return random.nextInt(150) + 30;
+	}
+
+	private static int generateMaxCapacity(){
+		return (random.nextInt(20) + 1) * 1000;
+	}
+
+	private static int generatePessangerMaxCount(){
+		return random.nextInt(100) + 10;
+	}
+
+	private static int generateBaggageMaxWeight(){
+		return random.nextInt(1000) + 500;
 	}
 
 	private static String generateNumber() {

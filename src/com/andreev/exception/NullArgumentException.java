@@ -1,6 +1,6 @@
 package com.andreev.exception;
 
-public class NullArgumentException extends IllegalArgumentException {
+public class NullArgumentException extends Exception {
 
 	private static final long serialVersionUID = -4732434632127730662L;
 

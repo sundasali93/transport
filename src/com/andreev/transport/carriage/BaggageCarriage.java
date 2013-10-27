@@ -1,11 +1,12 @@
 package com.andreev.transport.carriage;
 
+import com.andreev.exception.NullArgumentException;
 import com.andreev.exception.OutOfRangeException;
 
 public class BaggageCarriage extends AbstractFreightCarriage {
 
 	public BaggageCarriage(int id, String carriageNumber, int maxCapacity)
-			throws OutOfRangeException {
+			throws OutOfRangeException, NullArgumentException {
 		super(id);
 		setCarriageNumber(carriageNumber);
 		setMaxCapacity(maxCapacity);

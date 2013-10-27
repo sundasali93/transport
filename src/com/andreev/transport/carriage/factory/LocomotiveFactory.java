@@ -27,16 +27,21 @@ public class LocomotiveFactory {
 
 	public static AbstractCarriage newCarriage(LocomotiveType type, int id,
 			String carriageNumber, int maxSpeed) throws OutOfRangeException {
-		AbstractCarriage carriage;
-		if (type == LocomotiveType.ELECTRIC) {
-			carriage = new ElectricLocomotive(id, carriageNumber, maxSpeed);
-		} else if (type == LocomotiveType.DIESEL) {
-			carriage = new DieselLocomotive(id, carriageNumber, maxSpeed);
-		} else {
-			NullArgumentException e = new NullArgumentException(
-					"Carriage type is incorrect");
-			log.error("FreightCarType is incorrect", e);
-			throw e;
+		AbstractCarriage carriage = null;
+		try {
+			if (type == LocomotiveType.ELECTRIC) {
+				carriage = new ElectricLocomotive(id, carriageNumber, maxSpeed);
+			} else if (type == LocomotiveType.DIESEL) {
+				carriage = new DieselLocomotive(id, carriageNumber, maxSpeed);
+			} else {
+				NullArgumentException e = new NullArgumentException(
+						"Carriage type is incorrect");
+				log.error("FreightCarType is incorrect", e);
+				throw e;
+			}
+		} catch (NullArgumentException e) {
+			log.error("Can't create new Locomotive", e);
+			throw new RuntimeException(e);
 		}
 		log.debug("New Locomotive: " + carriage);
 		return carriage;

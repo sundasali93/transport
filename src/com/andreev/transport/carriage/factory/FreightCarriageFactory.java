@@ -27,14 +27,19 @@ public class FreightCarriageFactory {
 
 	public static AbstractCarriage newCarriage(FreightCarType type, int id,
 			String carriageNumber, int maxCapacity) throws OutOfRangeException {
-		AbstractCarriage carriage;
-		if (type == FreightCarType.BAGGAGE) {
-			carriage = new BaggageCarriage(id, carriageNumber, maxCapacity);
-		} else {
-			NullArgumentException e = new NullArgumentException(
-					"Carriage type is incorrect");
-			log.error("FreightCarType is incorrect", e);
-			throw e;
+		AbstractCarriage carriage = null;
+		try {
+			if (type == FreightCarType.BAGGAGE) {
+				carriage = new BaggageCarriage(id, carriageNumber, maxCapacity);
+			} else {
+				NullArgumentException e = new NullArgumentException(
+						"Carriage type is incorrect");
+				log.error("FreightCarType is incorrect", e);
+				throw new RuntimeException(e);
+			}
+		} catch (NullArgumentException e) {
+			log.error("Can't create new Freight Carriage", e);
+			throw new RuntimeException(e);
 		}
 		log.debug("New FreightCarriage: " + carriage);
 		return carriage;

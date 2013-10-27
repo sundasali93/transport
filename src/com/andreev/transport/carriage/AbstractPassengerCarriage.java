@@ -32,7 +32,8 @@ public abstract class AbstractPassengerCarriage extends AbstractCarriage {
 		return comfortType;
 	}
 
-	public void setComfortType(ComfortType comfortType) {
+	public void setComfortType(ComfortType comfortType)
+			throws NullArgumentException {
 		if (comfortType == null) {
 			throw new NullArgumentException("Comfort type is null");
 		}
