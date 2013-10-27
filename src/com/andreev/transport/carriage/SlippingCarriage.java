@@ -1,13 +1,12 @@
 package com.andreev.transport.carriage;
 
-import com.andreev.exception.NotNullException;
 import com.andreev.exception.OutOfRangeException;
 
 public class SlippingCarriage extends AbstractPassengerCarriage {
 
 	public SlippingCarriage(int id, String carriageNumber,
 			ComfortType comfortType, int passengerMaxCount, int baggageMaxWeight)
-			throws OutOfRangeException, NotNullException {
+			throws OutOfRangeException {
 		super(id);
 		setCarriageNumber(carriageNumber);
 		setComfortType(comfortType);

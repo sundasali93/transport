@@ -1,6 +1,6 @@
 package com.andreev.transport.carriage;
 
-import com.andreev.exception.NotNullException;
+import com.andreev.exception.NullArgumentException;
 import com.andreev.exception.OutOfRangeException;
 
 public abstract class AbstractPassengerCarriage extends AbstractCarriage {
@@ -32,9 +32,9 @@ public abstract class AbstractPassengerCarriage extends AbstractCarriage {
 		return comfortType;
 	}
 
-	public void setComfortType(ComfortType comfortType) throws NotNullException {
+	public void setComfortType(ComfortType comfortType) {
 		if (comfortType == null) {
-			throw new NotNullException("Comfort type is null");
+			throw new NullArgumentException("Comfort type is null");
 		}
 		this.comfortType = comfortType;
 

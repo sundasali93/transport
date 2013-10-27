@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 
+import com.andreev.exception.OutOfRangeException;
 import com.andreev.transport.carriage.AbstractCarriage;
 import com.andreev.transport.carriage.AbstractFreightCarriage;
 import com.andreev.transport.carriage.AbstractPassengerCarriage;
@@ -19,7 +20,7 @@ public class CarriageGenerator {
 
 	private static Random random = new Random();
 	private static int idCount = 0;
-	
+
 	private static final Logger log = Logger
 			.getLogger(CarriageGenerator.class);
 
@@ -32,7 +33,7 @@ public class CarriageGenerator {
 					random.nextInt(150) + 30);
 			log.debug("New Locomotive was generaed: " + carriage);
 			return carriage;
-		} catch (Exception e) {
+		} catch (OutOfRangeException e) {
 			log.error("Cant't generete new Locomotive", e);
 			throw new RuntimeException(e);
 		}
@@ -43,13 +44,13 @@ public class CarriageGenerator {
 			AbstractCarriage carriage = FreightCarriageFactory.newCarriage(
 					new RandomEnum<FreightCarType>(FreightCarType.class).random(),
 					generateId(),
-					generateNumber(), 
+					generateNumber(),
 					(random.nextInt(20) + 1) * 1000);
 			((AbstractFreightCarriage) carriage).setCurCapacity(random
 					.nextInt(((AbstractFreightCarriage) carriage).getMaxCapacity()));
 			log.debug("New FreightCarriage was generaed: " + carriage);
 			return carriage;
-		} catch (Exception e) {
+		} catch (OutOfRangeException e) {
 			log.error("Cant't generete new FreightCarriage", e);
 			throw new RuntimeException(e);
 		}
@@ -62,7 +63,7 @@ public class CarriageGenerator {
 					generateId(),
 					generateNumber(),
 					new RandomEnum<ComfortType>(ComfortType.class).random(),
-					random.nextInt(100) + 10, 
+					random.nextInt(100) + 10,
 					random.nextInt(1000) + 500);
 			((AbstractPassengerCarriage) carriage).setPassengerCurCount(random
 					.nextInt(((AbstractPassengerCarriage) carriage).getPassengerMaxCount()+ 1));
@@ -70,12 +71,12 @@ public class CarriageGenerator {
 					.nextInt(((AbstractPassengerCarriage) carriage).getBaggageMaxWeight() + 1));
 			log.debug("New PassengerCarriage was generaed: " + carriage);
 			return carriage;
-		} catch (Exception e) {
+		} catch (OutOfRangeException e) {
 			log.error("Cant't generete new PassengerCarriage", e);
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	private static class RandomEnum<E extends Enum<E>> {
 
         private final E[] values;
@@ -88,7 +89,7 @@ public class CarriageGenerator {
             return values[random.nextInt(values.length)];
         }
     }
-	
+
 	private static int generateId(){
 		return ++idCount;
 	}

@@ -1,6 +1,6 @@
 package com.andreev.transport.carriage;
 
-import com.andreev.exception.NotNullException;
+import com.andreev.exception.NullArgumentException;
 import com.andreev.exception.OutOfRangeException;
 
 public abstract class AbstractCarriage {
@@ -23,12 +23,11 @@ public abstract class AbstractCarriage {
 		return carriageNumber;
 	}
 
-	public void setCarriageNumber(String carriageNumber)
-			throws NotNullException {
+	public void setCarriageNumber(String carriageNumber) {
 		if (carriageNumber != null) {
 			this.carriageNumber = carriageNumber;
 		} else
-			throw new NotNullException("Carriage number is null");
+			throw new NullArgumentException("Carriage number is null");
 	}
 
 	@Override

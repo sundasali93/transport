@@ -2,7 +2,7 @@ package com.andreev.transport.carriage.factory;
 
 import org.apache.log4j.Logger;
 
-import com.andreev.exception.NotNullException;
+import com.andreev.exception.NullArgumentException;
 import com.andreev.exception.OutOfRangeException;
 import com.andreev.transport.carriage.AbstractCarriage;
 import com.andreev.transport.carriage.DieselLocomotive;
@@ -26,15 +26,14 @@ public class LocomotiveFactory {
 	private static final Logger log = Logger.getLogger(LocomotiveFactory.class);
 
 	public static AbstractCarriage newCarriage(LocomotiveType type, int id,
-			String carriageNumber, int maxSpeed) throws OutOfRangeException,
-			NotNullException {
+			String carriageNumber, int maxSpeed) throws OutOfRangeException {
 		AbstractCarriage carriage;
 		if (type == LocomotiveType.ELECTRIC) {
 			carriage = new ElectricLocomotive(id, carriageNumber, maxSpeed);
 		} else if (type == LocomotiveType.DIESEL) {
 			carriage = new DieselLocomotive(id, carriageNumber, maxSpeed);
 		} else {
-			NotNullException e = new NotNullException(
+			NullArgumentException e = new NullArgumentException(
 					"Carriage type is incorrect");
 			log.error("FreightCarType is incorrect", e);
 			throw e;
@@ -44,7 +43,7 @@ public class LocomotiveFactory {
 	}
 
 	public static AbstractCarriage newCarriage(LocomotiveType type, int id)
-			throws OutOfRangeException, NotNullException {
+			throws OutOfRangeException {
 		return newCarriage(type, id, "", 0);
 	}
 
