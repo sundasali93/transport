@@ -40,7 +40,7 @@ public class LocomotiveFactory {
 				throw e;
 			}
 		} catch (NullArgumentException e) {
-			log.error("Can't create new Locomotive", e);
+			log.fatal("Can't create new Locomotive", e);
 			throw new RuntimeException(e);
 		}
 		log.debug("New Locomotive: " + carriage);

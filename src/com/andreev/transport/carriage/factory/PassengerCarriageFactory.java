@@ -50,7 +50,7 @@ public class PassengerCarriageFactory {
 				throw e;
 			}
 		} catch (NullArgumentException e) {
-			log.error("Can't create new Passenger Carriage", e);
+			log.fatal("Can't create new Passenger Carriage", e);
 			throw new RuntimeException(e);
 		}
 		log.debug("New PassengerCarriage: " + carriage);

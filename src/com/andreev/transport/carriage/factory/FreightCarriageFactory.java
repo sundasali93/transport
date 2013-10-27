@@ -35,10 +35,10 @@ public class FreightCarriageFactory {
 				NullArgumentException e = new NullArgumentException(
 						"Carriage type is incorrect");
 				log.error("FreightCarType is incorrect", e);
-				throw new RuntimeException(e);
+				throw e;
 			}
 		} catch (NullArgumentException e) {
-			log.error("Can't create new Freight Carriage", e);
+			log.fatal("Can't create new Freight Carriage", e);
 			throw new RuntimeException(e);
 		}
 		log.debug("New FreightCarriage: " + carriage);

@@ -27,7 +27,7 @@ public class SimpleTrainGenerator {
 		try {
 			train = SimpleTrainFactory.newSimpleTrain(generateId(), generateNumber() );
 		} catch (OutOfRangeException e) {
-			log.error("Can't create new SimpleTrain", e);
+			log.fatal("Can't generate new SimpleTrain", e);
 			throw new RuntimeException(e);
 		}
 		for(int i = 0; i < locomotiveCount; i++){

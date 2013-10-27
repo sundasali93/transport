@@ -33,7 +33,7 @@ public class CarriageGenerator {
 			log.debug("New Locomotive was generaed: " + carriage);
 			return carriage;
 		} catch (OutOfRangeException e) {
-			log.error("Cant't generete new Locomotive", e);
+			log.fatal("Cant't generete new Locomotive", e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -50,7 +50,7 @@ public class CarriageGenerator {
 			log.debug("New FreightCarriage was generaed: " + carriage);
 			return carriage;
 		} catch (OutOfRangeException e) {
-			log.error("Cant't generete new FreightCarriage", e);
+			log.fatal("Cant't generete new FreightCarriage", e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -71,7 +71,7 @@ public class CarriageGenerator {
 			log.debug("New PassengerCarriage was generaed: " + carriage);
 			return carriage;
 		} catch (OutOfRangeException e) {
-			log.error("Cant't generete new PassengerCarriage", e);
+			log.fatal("Cant't generete new PassengerCarriage", e);
 			throw new RuntimeException(e);
 		}
 	}
