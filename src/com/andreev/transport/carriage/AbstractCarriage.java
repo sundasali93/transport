@@ -1,22 +1,21 @@
 package com.andreev.transport.carriage;
 
-import com.andreev.exception.NullArgumentException;
-import com.andreev.exception.OutOfRangeException;
+import com.andreev.transport.carriage.exception.CarriageException;
 
 public abstract class AbstractCarriage {
 
-	private final int id;
+	private final int ID;
 	private String carriageNumber;
 
-	public AbstractCarriage(int id) throws OutOfRangeException {
+	public AbstractCarriage(int id) throws CarriageException {
 		if (id >= 0)
-			this.id = id;
+			this.ID = id;
 		else
-			throw new OutOfRangeException("Id is under zero");
+			throw new CarriageException("Id is under zero");
 	}
 
 	public int getId() {
-		return id;
+		return ID;
 	}
 
 	public String getCarriageNumber() {
@@ -24,11 +23,11 @@ public abstract class AbstractCarriage {
 	}
 
 	public void setCarriageNumber(String carriageNumber)
-			throws NullArgumentException {
+			throws CarriageException {
 		if (carriageNumber != null) {
 			this.carriageNumber = carriageNumber;
 		} else
-			throw new NullArgumentException("Carriage number is null");
+			throw new CarriageException("Carriage number is null");
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public abstract class AbstractCarriage {
 		int result = 1;
 		result = prime * result
 				+ ((carriageNumber == null) ? 0 : carriageNumber.hashCode());
-		result = prime * result + id;
+		result = prime * result + ID;
 		return result;
 	}
 
@@ -55,7 +54,7 @@ public abstract class AbstractCarriage {
 				return false;
 		} else if (!carriageNumber.equals(other.carriageNumber))
 			return false;
-		if (id != other.id)
+		if (ID != other.ID)
 			return false;
 		return true;
 	}

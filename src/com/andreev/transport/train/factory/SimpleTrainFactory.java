@@ -2,23 +2,23 @@ package com.andreev.transport.train.factory;
 
 import org.apache.log4j.Logger;
 
-import com.andreev.exception.OutOfRangeException;
 import com.andreev.transport.train.SimpleTrain;
+import com.andreev.transport.train.exception.TrainException;
 
 public class SimpleTrainFactory {
 
-	private static final Logger log = Logger
+	private static final Logger LOG = Logger
 			.getLogger(SimpleTrainFactory.class);
 
 	public static SimpleTrain newSimpleTrain(int id, int number)
-			throws OutOfRangeException {
+			throws TrainException {
 		SimpleTrain st = new SimpleTrain(id, number);
-		log.debug("New SimpleTrain created");
+		LOG.debug("New SimpleTrain created");
 		return st;
 	}
 
 	public static SimpleTrain newSimpleTrain(int id)
-			throws OutOfRangeException {
+			throws TrainException {
 		return newSimpleTrain(id, 0);
 	}
 

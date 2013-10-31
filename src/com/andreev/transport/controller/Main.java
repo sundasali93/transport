@@ -2,7 +2,6 @@ package com.andreev.transport.controller;
 
 import org.apache.log4j.Logger;
 
-import com.andreev.transport.carriage.AbstractCarriage;
 import com.andreev.transport.train.SimpleTrain;
 import com.andreev.transport.train.generator.SimpleTrainGenerator;
 import com.andreev.transport.train.utils.SimpleTrainCounter;
@@ -11,10 +10,10 @@ import com.andreev.transport.train.utils.SimpleTrainSorter;
 
 public class Main {
 
-	private static final Logger log = Logger.getLogger(Main.class);
+	private static final Logger LOG = Logger.getLogger(Main.class);
 
 	public static void main(String[] args) {
-		log.info("Application start");
+		LOG.info("Application start");
 
 		SimpleTrain train = SimpleTrainGenerator.generateTrain();
 
@@ -30,13 +29,10 @@ public class Main {
 
 		int min = 5;
 		int max = 20;
-		System.out.println("\nCarriages with the Count of Passengers between " + min
-				+ " and " + max + ":");
-		for (AbstractCarriage ac : (SimpleTrainFinder.findCarriages(train, min,
-				max))) {
-			System.out.println(ac);
-		}
-		log.info("Application stop");
+		System.out.println("\nCarriages with the Count of Passengers between "
+				+ min + " and " + max + ":");
+		System.out.println(SimpleTrainFinder.findCarriages(train, min, max));
+		LOG.info("Application stop");
 	}
 
 }

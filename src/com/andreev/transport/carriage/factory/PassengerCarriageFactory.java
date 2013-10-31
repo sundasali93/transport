@@ -2,13 +2,12 @@ package com.andreev.transport.carriage.factory;
 
 import org.apache.log4j.Logger;
 
-import com.andreev.exception.NullArgumentException;
-import com.andreev.exception.OutOfRangeException;
 import com.andreev.transport.carriage.AbstractCarriage;
 import com.andreev.transport.carriage.AbstractPassengerCarriage.ComfortType;
 import com.andreev.transport.carriage.CoachCarriage;
 import com.andreev.transport.carriage.DiningCarriage;
 import com.andreev.transport.carriage.SlippingCarriage;
+import com.andreev.transport.carriage.exception.CarriageException;
 
 public class PassengerCarriageFactory {
 
@@ -25,40 +24,33 @@ public class PassengerCarriageFactory {
 		}
 	}
 
-	private static final Logger log = Logger
+	private static final Logger LOG = Logger
 			.getLogger(PassengerCarriageFactory.class);
 
 	public static AbstractCarriage newCarriage(PassengerCarType type, int id,
 			String carriageNumber, ComfortType comfortType,
 			int passengerMaxCount, int baggageMaxWeight)
-			throws OutOfRangeException {
+			throws CarriageException {
 		AbstractCarriage carriage;
-		try {
-			if (type == PassengerCarType.COACH) {
-				carriage = new CoachCarriage(id, carriageNumber, comfortType,
-						passengerMaxCount, baggageMaxWeight);
-			} else if (type == PassengerCarType.SLIPPING) {
-				carriage = new SlippingCarriage(id, carriageNumber, comfortType,
-						passengerMaxCount, baggageMaxWeight);
-			} else if (type == PassengerCarType.DINING) {
-				carriage = new DiningCarriage(id, carriageNumber, comfortType,
-						passengerMaxCount);
-			} else {
-				NullArgumentException e = new NullArgumentException(
-						"Carriage type is incorrect");
-				log.error("FreightCarType is incorrect", e);
-				throw e;
-			}
-		} catch (NullArgumentException e) {
-			log.fatal("Can't create new Passenger Carriage", e);
-			throw new RuntimeException(e);
+		if (type == PassengerCarType.COACH) {
+			carriage = new CoachCarriage(id, carriageNumber, comfortType,
+					passengerMaxCount, baggageMaxWeight);
+		} else if (type == PassengerCarType.SLIPPING) {
+			carriage = new SlippingCarriage(id, carriageNumber, comfortType,
+					passengerMaxCount, baggageMaxWeight);
+		} else if (type == PassengerCarType.DINING) {
+			carriage = new DiningCarriage(id, carriageNumber, comfortType,
+					passengerMaxCount);
+		} else {
+			LOG.error("FreightCarType is incorrect");
+			throw new CarriageException("Carriage type is incorrect");
 		}
-		log.debug("New PassengerCarriage: " + carriage);
+		LOG.debug("New PassengerCarriage: " + carriage);
 		return carriage;
 	}
 
 	public static AbstractCarriage newCarriage(PassengerCarType type, int id)
-			throws OutOfRangeException {
+			throws CarriageException {
 		return newCarriage(type, id, "", ComfortType.PUBLIC, 0, 0);
 	}
 

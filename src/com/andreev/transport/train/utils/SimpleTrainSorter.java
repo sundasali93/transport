@@ -5,7 +5,6 @@ import java.util.Comparator;
 
 import org.apache.log4j.Logger;
 
-import com.andreev.exception.NullArgumentException;
 import com.andreev.transport.carriage.AbstractCarriage;
 import com.andreev.transport.carriage.AbstractFreightCarriage;
 import com.andreev.transport.carriage.AbstractLocomotive;
@@ -14,14 +13,13 @@ import com.andreev.transport.train.SimpleTrain;
 
 public class SimpleTrainSorter {
 
-	private static final Logger log = Logger.getLogger(SimpleTrainSorter.class);
+	private static final Logger LOG = Logger.getLogger(SimpleTrainSorter.class);
 
 	public static void sort(SimpleTrain train,
 			Comparator<AbstractCarriage> comparator) {
 		if(train == null){
-			NullArgumentException e = new NullArgumentException("Train is null");
-			log.error("Can't sort the train",e);
-			throw new RuntimeException(e);
+			LOG.error("Train is null");
+			throw new IllegalArgumentException("Train is null");
 		}
 		Collections.sort(train, comparator);
 	}

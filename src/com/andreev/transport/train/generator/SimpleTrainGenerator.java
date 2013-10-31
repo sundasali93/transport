@@ -4,14 +4,14 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 
-import com.andreev.exception.OutOfRangeException;
 import com.andreev.transport.carriage.generator.CarriageGenerator;
 import com.andreev.transport.train.SimpleTrain;
+import com.andreev.transport.train.exception.TrainException;
 import com.andreev.transport.train.factory.SimpleTrainFactory;
 
 public class SimpleTrainGenerator {
 
-	private static final Logger log = Logger.getLogger(SimpleTrainGenerator.class);
+	private static final Logger LOG = Logger.getLogger(SimpleTrainGenerator.class);
 
 	private static final int MAX_TRAIN_NUMBER = 999;
 
@@ -26,9 +26,9 @@ public class SimpleTrainGenerator {
 		SimpleTrain train = null;
 		try {
 			train = SimpleTrainFactory.newSimpleTrain(generateId(), generateNumber() );
-		} catch (OutOfRangeException e) {
-			log.fatal("Can't generate new SimpleTrain", e);
-			throw new RuntimeException(e);
+		} catch (TrainException e) {
+			LOG.fatal("Can't generate new SimpleTrain", e);
+			System.exit(1);
 		}
 		for(int i = 0; i < locomotiveCount; i++){
 				train.add(CarriageGenerator.generateLocomotive());
@@ -39,7 +39,7 @@ public class SimpleTrainGenerator {
 		for(int i = 0; i < freightCount; i++){
 			train.add(CarriageGenerator.generateFreightCarriage());
 		}
-		log.debug("New SimpleTrain was generated");
+		LOG.debug("New SimpleTrain was generated");
 		return train;
 	}
 

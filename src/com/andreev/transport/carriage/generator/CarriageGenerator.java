@@ -4,11 +4,11 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 
-import com.andreev.exception.OutOfRangeException;
 import com.andreev.transport.carriage.AbstractCarriage;
 import com.andreev.transport.carriage.AbstractFreightCarriage;
 import com.andreev.transport.carriage.AbstractPassengerCarriage;
 import com.andreev.transport.carriage.AbstractPassengerCarriage.ComfortType;
+import com.andreev.transport.carriage.exception.CarriageException;
 import com.andreev.transport.carriage.factory.FreightCarriageFactory;
 import com.andreev.transport.carriage.factory.FreightCarriageFactory.FreightCarType;
 import com.andreev.transport.carriage.factory.LocomotiveFactory;
@@ -18,46 +18,49 @@ import com.andreev.transport.carriage.factory.PassengerCarriageFactory.Passenger
 
 public class CarriageGenerator {
 
-	private static final Logger log = Logger.getLogger(CarriageGenerator.class);
+	private static final Logger LOG = Logger.getLogger(CarriageGenerator.class);
 
 	private static Random random = new Random();
 	private static int idCount = 0;
 
 	public static AbstractCarriage generateLocomotive() {
+		AbstractCarriage carriage = null;
 		try {
-			AbstractCarriage carriage = LocomotiveFactory.newCarriage(
+			carriage = LocomotiveFactory.newCarriage(
 					new RandomEnum<LocomotiveType>(LocomotiveType.class).random(),
 					generateId(),
 					generateNumber(),
 					generateMaxSpeed());
-			log.debug("New Locomotive was generaed: " + carriage);
-			return carriage;
-		} catch (OutOfRangeException e) {
-			log.fatal("Cant't generete new Locomotive", e);
-			throw new RuntimeException(e);
+		} catch (CarriageException e) {
+			LOG.fatal("Cant't generete new Locomotive", e);
+			System.exit(1);
 		}
+		LOG.debug("New Locomotive was generaed: " + carriage);
+		return carriage;
 	}
 
 	public static AbstractCarriage generateFreightCarriage() {
+		AbstractCarriage carriage = null;
 		try {
-			AbstractCarriage carriage = FreightCarriageFactory.newCarriage(
+			carriage = FreightCarriageFactory.newCarriage(
 					new RandomEnum<FreightCarType>(FreightCarType.class).random(),
 					generateId(),
 					generateNumber(),
 					generateMaxCapacity());
 			((AbstractFreightCarriage) carriage).setCurCapacity(random
 					.nextInt(((AbstractFreightCarriage) carriage).getMaxCapacity()));
-			log.debug("New FreightCarriage was generaed: " + carriage);
-			return carriage;
-		} catch (OutOfRangeException e) {
-			log.fatal("Cant't generete new FreightCarriage", e);
-			throw new RuntimeException(e);
+		} catch (CarriageException e) {
+			LOG.fatal("Cant't generete new FreightCarriage", e);
+			System.exit(1);
 		}
+		LOG.debug("New FreightCarriage was generaed: " + carriage);
+		return carriage;
 	}
 
 	public static AbstractCarriage generatePassengerCarriage() {
+		AbstractCarriage carriage = null;
 		try {
-			AbstractCarriage carriage = PassengerCarriageFactory.newCarriage(
+			carriage = PassengerCarriageFactory.newCarriage(
 					new RandomEnum<PassengerCarType>(PassengerCarType.class).random(),
 					generateId(),
 					generateNumber(),
@@ -68,12 +71,12 @@ public class CarriageGenerator {
 					.nextInt(((AbstractPassengerCarriage) carriage).getPassengerMaxCount()+ 1));
 			((AbstractPassengerCarriage) carriage).setBaggageCurWeight(random
 					.nextInt(((AbstractPassengerCarriage) carriage).getBaggageMaxWeight() + 1));
-			log.debug("New PassengerCarriage was generaed: " + carriage);
-			return carriage;
-		} catch (OutOfRangeException e) {
-			log.fatal("Cant't generete new PassengerCarriage", e);
-			throw new RuntimeException(e);
+		} catch (CarriageException e) {
+			LOG.fatal("Cant't generete new PassengerCarriage", e);
+			System.exit(1);
 		}
+		LOG.debug("New PassengerCarriage was generaed: " + carriage);
+		return carriage;
 	}
 
 	private static class RandomEnum<E extends Enum<E>> {

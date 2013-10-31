@@ -1,13 +1,14 @@
 package com.andreev.transport.carriage;
 
-import com.andreev.exception.OutOfRangeException;
+import com.andreev.transport.carriage.exception.CarriageException;
+
 
 public abstract class AbstractFreightCarriage extends AbstractCarriage {
 
 	private int maxCapacity;
 	private int curCapacity;
 
-	public AbstractFreightCarriage(int id) throws OutOfRangeException {
+	public AbstractFreightCarriage(int id) throws CarriageException {
 		super(id);
 	}
 
@@ -15,11 +16,11 @@ public abstract class AbstractFreightCarriage extends AbstractCarriage {
 		return maxCapacity;
 	}
 
-	public void setMaxCapacity(int maxCapacity) throws OutOfRangeException {
+	public void setMaxCapacity(int maxCapacity) throws CarriageException {
 		if (maxCapacity >= 0) {
 			this.maxCapacity = maxCapacity;
 		} else {
-			throw new OutOfRangeException("Maximum capacity is under zero");
+			throw new CarriageException("Maximum capacity is under zero");
 		}
 	}
 
@@ -27,11 +28,11 @@ public abstract class AbstractFreightCarriage extends AbstractCarriage {
 		return curCapacity;
 	}
 
-	public void setCurCapacity(int curCapacity) throws OutOfRangeException {
+	public void setCurCapacity(int curCapacity) throws CarriageException {
 		if ((curCapacity <= this.maxCapacity) && (curCapacity >= 0)) {
 			this.curCapacity = curCapacity;
 		} else {
-			throw new OutOfRangeException(
+			throw new CarriageException(
 					"Current capacity is out of range [0, " + this.maxCapacity
 							+ "]");
 		}
