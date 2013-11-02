@@ -22,7 +22,7 @@ public class DiningCarriage extends AbstractPassengerCarriage {
 
 	public void setTableCount(int tableCount) throws CarriageException {
 		if (tableCount < 0) {
-			throw new CarriageException("Waiter count is under zero");
+			throw new CarriageException("Table count is under zero");
 		}
 		this.tableCount = tableCount;
 	}

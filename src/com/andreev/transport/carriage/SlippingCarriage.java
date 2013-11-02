@@ -22,7 +22,7 @@ public class SlippingCarriage extends AbstractPassengerCarriage {
 
 	public void setBedCount(int bedCount) throws CarriageException {
 		if (bedCount < 0) {
-			throw new CarriageException("Bed count is under zero");
+			throw new CarriageException("Beds count is under zero");
 		}
 		this.bedCount = bedCount;
 	}

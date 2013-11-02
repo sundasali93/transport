@@ -19,7 +19,7 @@ public class ElectricLocomotive extends AbstractLocomotive {
 
 	public void setBatteryVolume(int batteryVolume) throws CarriageException {
 		if (batteryVolume < 0) {
-			throw new CarriageException("Volume of the battery is under zero");
+			throw new CarriageException("Battery volume is under zero");
 		}
 		this.batteryVolume = batteryVolume;
 	}

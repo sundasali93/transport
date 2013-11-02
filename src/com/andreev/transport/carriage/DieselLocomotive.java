@@ -19,7 +19,7 @@ public class DieselLocomotive extends AbstractLocomotive {
 
 	public void setTankVolume(int tankVolume) throws CarriageException {
 		if (tankVolume < 0) {
-			throw new CarriageException("Volume of the tank is under zero");
+			throw new CarriageException("Tank volume is under zero");
 		}
 		this.tankVolume = tankVolume;
 	}
